@@ -1,58 +1,37 @@
-# HEMapp landing (hemapp.hu)
+# HEMapp OnePage – végleges változat
 
-A HEMapp publikus bemutatkozó oldala. **Statikus HTML — nincs build, nincs
-dependency.** Aki HTML-t és CSS-t ír, az tudja szerkeszteni.
+## Indítás
+Az `index.html` önállóan megnyitható böngészőben, vagy feltölthető bármely statikus webszerverre.
 
-```
-index.html        egyoldalas landing (a navigáció ugyanezen az oldalon ugrik)
-docs/index.html   dokumentáció és segédletek (/docs)
-style.css         a teljes megjelenés
-site.js           mobil menü + cookie hozzájárulás (~90 sor)
-assets/           logó
-vercel.json       tiszta URL-ek, cache- és security headerek
-robots.txt, sitemap.xml
-```
+## Beállítandó adatok
+Az `index.html` végén található `SITE_CONFIG` objektumban módosítható:
 
-## Szerkesztés és közzététel
-
-```sh
-git clone https://github.com/SimiDonk/hemapp-landing.git
-cd hemapp-landing
-python3 -m http.server 4321      # majd http://localhost:4321
+```js
+const SITE_CONFIG = {
+  demoUrl: "https://hemapp.hu/",
+  contactEmail: "info@hemapp.hu"
+};
 ```
 
-A `file://` megnyitás nem jó: az oldal abszolút útvonalakra hivatkozik
-(`/style.css`), ezért kell a helyi szerver.
+- `demoUrl`: a teljes demo-adatbázissal működő kivitelezői demórendszer címe.
+- `contactEmail`: a kapcsolatfelvételi űrlap címzettje.
 
-Ami a `main` ágra kerül, azt a Vercel magától kiteszi a `hemapp.hu`-ra — külön
-telepítési lépés nincs, a build egy-két perc.
+A kapcsolatfelvételi űrlap jelenleg e-mail-tervezetet nyit meg. Éles környezetben CRM-hez, API-hoz vagy szerveroldali űrlapfeldolgozáshoz kapcsolható.
 
-## Kapcsolódó címek
+## Mobilalkalmazások
+A Google Play és App Store elemek jelenleg „Hamarosan” állapotú, nem kattintható jelölések. A publikálást követően ezekhez külön áruházi URL-ek adhatók.
 
-| Cím | Mi van ott |
-| --- | --- |
-| `hemapp.hu` | ez az oldal |
-| `app.hemapp.hu` | a HEMapp alkalmazás (másik repóban) |
-| `demo.hemapp.hu` | a bemutató környezet — ide mutatnak a „Demó" gombok |
+## A végleges változat fő módosításai
+- a nyitóüzenet a lakossági leadtől a HEM megvalósításáig pozicionálja a platformot;
+- az EKR/HEM magyarázat egyetlen összefüggő bekezdés lett;
+- részletes építőanyag-kereskedői és white-label leadgenerálási értékajánlat;
+- szabályozható saját termékkör és zárt kivitelezői ajánlattétel;
+- auditor → első számú jogosult/szervező → kivitelező szerepkör-sorrend;
+- nyolclépéses folyamat a MEKH-bejegyzésig;
+- teljes, szerepkörönként bontott funkciókatalógus;
+- opcionális oktatási, bevezetési és operatív support;
+- teljesen végigkattintható kivitelezői demórendszer kommunikációja;
+- hamarosan elérhető Android- és iOS-alkalmazások jelölése.
 
-## Amit érdemes tudni szerkesztés előtt
-
-- **A tartalom a HTML-ben van, nem adatbázisban.** Amit átírsz, az azonnal
-  látszik — nincs mögötte CMS.
-- **Az oldal magyar**, nincs nyelvváltás. Angol verzió külön fájlkészletet
-  jelentene.
-- **A `/docs` oldal a `docs/index.html`-ben él**, és a `vercel.json` egy rewrite
-  szabállyal szolgálja ki a `/docs` címen. Új aloldal ugyanígy: mappa +
-  `index.html` + egy rewrite sor. (Enélkül a `cleanUrls` egy `docs.html` nevű
-  fájlt keresne, és 404-et adna.)
-- **A cookie-sáv** (`site.js`) csak a hozzájárulás tényét tárolja a böngészőben.
-  Mérőkódot kizárólag a `loadMeasurement()` függvénybe szabad tenni — így
-  hozzájárulás nélkül nem futhat. Jelenleg nincs benne semmi.
-- **Jogi szövegek**: az adatkezelési tájékoztató és az ÁSZF szakasza a
-  `docs/index.html`-ben jelölten előkészítés alatt áll. A cookie-tájékoztató
-  viszont valós szöveg, mert a sáv arra hivatkozik.
-
-## Nyitott pont
-
-`og:image`: jelenleg a négyzetes logó. Egy 1200×630-as változat jobban mutatna
-a közösségi megosztásokban.
+## Jogi megjegyzés
+A szabályozási összefoglaló 2026. júliusi állapot szerint készült. Éles publikálás előtt és ezt követően rendszeresen célszerű ellenőrizni a hivatalos MEKH- és Nemzeti Jogszabálytár-forrásokat.

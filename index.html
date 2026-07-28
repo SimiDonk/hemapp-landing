@@ -1,717 +1,1200 @@
 <!doctype html>
 <html lang="hu">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>HEMapp — HEM-projektek egy rendszerben, a felméréstől a hitelesítésig</title>
-    <meta
-      name="description"
-      content="A HEMapp a lakossági energiamegtakarítási (HEM) projektek teljes adminisztrációját egy rendszerbe zárja: kivitelező, elsődleges jogosult és auditor ugyanazon a projekten dolgozik — felmérés, rendelet szerinti HEM-számítás, szerződés e-aláírással, hitelesítés, kötegelt beadás."
-    />
-    <link rel="canonical" href="https://hemapp.hu/" />
-    <meta name="theme-color" content="#0b1620" />
-    <meta name="robots" content="index, follow" />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071524">
+  <meta name="description" content="A HEMApp a lakossági leadtől a kalkuláción, kivitelezési dokumentáción és auditon át a HEM megvalósításáig és a MEKH EKR-nyilvántartási bejegyzés előkészítéséig kezeli az energiahatékonysági projekteket.">
+  <meta name="keywords" content="HEM projektmenedzsment, EKR, hitelesített energiamegtakarítás, HEM audit, HEM köteg, MEKH bejegyzés, első számú jogosult, szervező, auditor, kivitelező, leadgenerálás, energiahatékonysági projekt">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="hu_HU">
+  <meta property="og:title" content="HEMApp – A lakossági leadtől a HEM megvalósításáig">
+  <meta property="og:description" content="Közös HEM-projektkezelés első számú jogosultaknak, szervezőknek, auditoroknak és kivitelezőknek – nagy projektvolumenre tervezve.">
+  <meta property="og:url" content="https://hemapp.hu/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://hemapp.hu/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <title>HEMApp – HEM projektmenedzsment</title>
+  <style>
+    :root {
+      --ink: #071524;
+      --ink-2: #0e243a;
+      --ink-3: #17344e;
+      --cyan: #2aa9df;
+      --cyan-2: #78d5f4;
+      --teal: #13c8a2;
+      --teal-2: #8be7d0;
+      --blue: #4e72ff;
+      --amber: #ffb44a;
+      --rose: #ff7c7c;
+      --paper: #ffffff;
+      --mist: #f3f7fa;
+      --line: #dce6ed;
+      --text: #172636;
+      --muted: #607184;
+      --shadow-sm: 0 12px 30px rgba(10, 34, 55, .08);
+      --shadow: 0 28px 80px rgba(4, 28, 50, .18);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --container: 1180px;
+    }
 
-    <!-- Open Graph / social -->
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="hu_HU" />
-    <meta property="og:site_name" content="HEMapp" />
-    <meta property="og:url" content="https://hemapp.hu/" />
-    <meta
-      property="og:title"
-      content="HEMapp — HEM-projektek egy rendszerben"
-    />
-    <meta
-      property="og:description"
-      content="Kivitelező, jogosult és auditor ugyanazon a projekten: felmérés, rendelet szerinti HEM-számítás, szerződés e-aláírással, hitelesítés és kötegelt beadás egy platformon."
-    />
-    <!-- TODO: replace with a 1200x630 OG image once brand artwork is ready -->
-    <meta property="og:image" content="https://hemapp.hu/assets/hemapp-logo.png" />
-    <meta name="twitter:card" content="summary" />
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.menu-open { overflow: hidden; }
+    img, svg { display: block; max-width: 100%; }
+    button, input, select, textarea { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    p { margin: 0 0 1rem; }
+    h1, h2, h3, h4 { margin: 0; font-family: Manrope, Inter, sans-serif; line-height: 1.12; letter-spacing: -.035em; }
+    h2 { font-size: clamp(2rem, 4vw, 3.4rem); }
+    h3 { font-size: 1.25rem; }
+    section { position: relative; }
 
-    <link rel="icon" href="/assets/hemapp-logo.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/assets/hemapp-logo.png" />
-    <link rel="stylesheet" href="/style.css" />
+    .container { width: min(calc(100% - 40px), var(--container)); margin-inline: auto; }
+    .section { padding: 112px 0; }
+    .section-soft { background: var(--mist); }
+    .section-dark { color: #fff; background: var(--ink); overflow: hidden; }
+    .section-head { max-width: 760px; margin-bottom: 52px; }
+    .section-head.center { text-align: center; margin-inline: auto; }
+    .section-head p { margin-top: 18px; font-size: 1.08rem; color: var(--muted); }
+    .section-dark .section-head p { color: #a9bdd0; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      color: #157da9;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; border-radius: 99px; background: currentColor; }
+    .section-dark .eyebrow { color: var(--cyan-2); }
+    .muted { color: var(--muted); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "HEMapp",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web, iOS, Android",
-        "inLanguage": "hu",
-        "url": "https://hemapp.hu/",
-        "description": "HEM-projektek (lakossági energiamegtakarítás) teljes körű adminisztrációja kivitelezőknek, elsődleges jogosultaknak és auditoroknak: terepi felmérés, rendelet szerinti HEM-számítás, szerződés elektronikus aláírással, hitelesítés és kötegelt MEKH-beadás.",
-        "publisher": {
-          "@type": "Organization",
-          "name": "Global Airconditional Kft.",
-          "email": "info@global-klima.hu",
-          "telephone": "+36306778084",
-          "vatID": "25130843-2-13",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Tengely utca 5.",
-            "postalCode": "2220",
-            "addressLocality": "Vecsés",
-            "addressCountry": "HU"
-          }
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <a class="skip-link" href="#tartalom">Ugrás a tartalomra</a>
+    /* Navigation */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1000;
+      padding: 16px 0;
+      transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+    }
+    .site-header.scrolled { padding: 10px 0; background: rgba(7, 21, 36, .9); box-shadow: 0 10px 35px rgba(0,0,0,.14); backdrop-filter: blur(18px); }
+    .nav-wrap { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; color: #fff; font-family: Manrope, sans-serif; font-weight: 800; letter-spacing: -.02em; }
+    .brand-mark { width: 38px; height: 38px; }
+    .brand-copy { display: grid; line-height: 1.05; }
+    .brand-copy strong { font-size: 1.02rem; letter-spacing: .02em; }
+    .brand-copy small { margin-top: 4px; color: #91aec4; font-size: .56rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: #d5e2ec; font-size: .91rem; font-weight: 600; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { display: inline-flex; align-items: center; gap: 8px; padding: 11px 17px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: #fff; background: rgba(255,255,255,.07); }
+    .nav-cta:hover { background: rgba(255,255,255,.13); }
+    .menu-toggle { display: none; width: 44px; height: 44px; place-items: center; border: 1px solid rgba(255,255,255,.16); border-radius: 13px; color: #fff; background: rgba(255,255,255,.07); cursor: pointer; }
 
-    <header class="topbar">
-      <div class="wrap topbar__inner">
-        <a class="brand" href="/">
-          <img src="/assets/hemapp-logo.png" alt="" width="30" height="30" />
-          <span>HEM<i>app</i></span>
-        </a>
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 21px; border: 0; border-radius: 14px; font-weight: 800; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: #04253a; background: linear-gradient(135deg, var(--cyan-2), #5de2cf); box-shadow: 0 12px 35px rgba(45, 190, 220, .28); }
+    .btn-primary:hover { box-shadow: 0 16px 40px rgba(45, 190, 220, .38); }
+    .btn-secondary { color: #fff; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.07); }
+    .btn-secondary:hover { background: rgba(255,255,255,.13); }
+    .btn-dark { color: #fff; background: var(--ink); box-shadow: 0 14px 30px rgba(7,21,36,.18); }
+    .btn-outline { color: var(--ink); border: 1px solid var(--line); background: #fff; }
+    .btn svg { width: 18px; height: 18px; }
 
-        <button
-          class="nav__toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="fonav"
-          data-nav-toggle
-        >
-          Menü
-        </button>
+    /* Hero */
+    .hero {
+      min-height: 850px;
+      padding: 150px 0 96px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 77% 22%, rgba(42,169,223,.24), transparent 27%),
+        radial-gradient(circle at 26% 72%, rgba(19,200,162,.13), transparent 27%),
+        linear-gradient(135deg, #061421 0%, #0a2035 52%, #071524 100%);
+      overflow: hidden;
+    }
+    .hero::before { content: ""; position: absolute; inset: 0; opacity: .3; background-image: radial-gradient(rgba(255,255,255,.3) 1px, transparent 1px); background-size: 32px 32px; mask-image: linear-gradient(to bottom, black 0%, transparent 80%); }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.02fr .98fr; gap: 74px; align-items: center; }
+    .hero .eyebrow { color: var(--cyan-2); }
+    .hero h1 { max-width: 760px; font-size: clamp(3rem, 6.3vw, 5.6rem); }
+    .hero h1 span { color: transparent; background: linear-gradient(100deg, var(--cyan-2), var(--teal-2)); -webkit-background-clip: text; background-clip: text; }
+    .hero-lead { max-width: 650px; margin: 26px 0 32px; color: #b7cadd; font-size: clamp(1.03rem, 2vw, 1.22rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-audience { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 30px; color: #91abc0; font-size: .86rem; }
+    .hero-audience strong { color: #d9e7f0; }
+    .audience-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .audience-list span { padding: 7px 10px; border: 1px solid rgba(255,255,255,.1); border-radius: 999px; background: rgba(255,255,255,.045); }
 
-        <nav class="nav" id="fonav" aria-label="Fő navigáció">
-          <a href="#miert">Miért</a>
-          <a href="#funkciok">Funkciók</a>
-          <a href="#folyamat">Folyamat</a>
-          <a href="#kinek">Kinek szól</a>
-          <a href="/docs">Dokumentáció</a>
-          <a href="#kapcsolat">Kapcsolat</a>
-          <a class="btn btn--primary" href="https://demo.hemapp.hu" rel="noopener">Demó</a>
-        </nav>
+    .hero-visual { position: relative; min-height: 560px; }
+    .glow { position: absolute; width: 360px; height: 360px; top: 90px; right: 15px; border-radius: 50%; background: rgba(42,169,223,.25); filter: blur(95px); }
+    .app-window { position: absolute; inset: 30px 0 auto; border: 1px solid rgba(255,255,255,.14); border-radius: 25px; background: rgba(12, 34, 53, .84); box-shadow: 0 38px 100px rgba(0,0,0,.42); backdrop-filter: blur(20px); overflow: hidden; transform: perspective(1300px) rotateY(-5deg) rotateX(2deg); }
+    .window-bar { display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 16px; border-bottom: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.035); }
+    .window-dots { display: flex; gap: 7px; }
+    .window-dots i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.25); }
+    .window-title { color: #88a5b9; font-size: .72rem; font-weight: 700; }
+    .app-body { display: grid; grid-template-columns: 126px 1fr; min-height: 455px; }
+    .app-sidebar { padding: 16px 12px; border-right: 1px solid rgba(255,255,255,.08); background: rgba(5,18,30,.35); }
+    .side-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; color: #eaf7ff; font-size: .76rem; font-weight: 800; }
+    .side-logo b { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 7px; color: #04283a; background: var(--cyan-2); }
+    .side-nav { display: grid; gap: 7px; }
+    .side-nav span { display: flex; align-items: center; gap: 8px; height: 31px; padding: 0 9px; border-radius: 8px; color: #7791a7; font-size: .64rem; font-weight: 700; }
+    .side-nav span.active { color: #e7f8ff; background: rgba(42,169,223,.22); }
+    .side-nav i { width: 7px; height: 7px; border-radius: 2px; background: currentColor; opacity: .7; }
+    .app-main { padding: 22px; }
+    .app-top { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 20px; }
+    .app-top h4 { font-size: 1rem; letter-spacing: -.02em; }
+    .app-top small { color: #7994aa; font-size: .66rem; }
+    .mini-tabs { display: flex; gap: 6px; }
+    .mini-tabs span { padding: 6px 9px; border-radius: 8px; color: #7895a8; font-size: .58rem; font-weight: 800; background: rgba(255,255,255,.04); }
+    .mini-tabs .active { color: #042c42; background: var(--cyan-2); }
+    .app-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .app-stat { min-height: 70px; padding: 12px; border: 1px solid rgba(255,255,255,.08); border-radius: 13px; background: rgba(255,255,255,.035); }
+    .app-stat small { color: #7894a9; font-size: .57rem; }
+    .app-stat strong { display: block; margin-top: 8px; font-family: Manrope; font-size: .9rem; }
+    .app-stat .line { width: 70%; height: 5px; margin-top: 7px; border-radius: 10px; background: linear-gradient(90deg, var(--cyan), var(--teal)); }
+    .project-table { border: 1px solid rgba(255,255,255,.08); border-radius: 14px; overflow: hidden; }
+    .project-row { display: grid; grid-template-columns: 1.1fr .85fr .85fr .7fr; gap: 8px; align-items: center; min-height: 50px; padding: 0 12px; border-bottom: 1px solid rgba(255,255,255,.07); color: #a9bdcb; font-size: .59rem; }
+    .project-row:last-child { border-bottom: 0; }
+    .project-row.head { min-height: 34px; color: #607d92; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; background: rgba(255,255,255,.025); }
+    .project-row strong { color: #e6f2f8; font-size: .63rem; }
+    .status { display: inline-flex; align-items: center; justify-content: center; width: fit-content; padding: 5px 8px; border-radius: 99px; font-size: .53rem; font-weight: 800; }
+    .status.green { color: #9cf0d5; background: rgba(19,200,162,.14); }
+    .status.blue { color: #a5dcf5; background: rgba(42,169,223,.16); }
+    .status.amber { color: #ffd391; background: rgba(255,180,74,.14); }
+    .floating-card { position: absolute; z-index: 4; display: flex; align-items: center; gap: 12px; padding: 13px 15px; border: 1px solid rgba(255,255,255,.16); border-radius: 15px; color: #e8f7ff; background: rgba(17, 48, 71, .88); box-shadow: 0 18px 45px rgba(0,0,0,.28); backdrop-filter: blur(16px); }
+    .floating-card .icon-box { width: 37px; height: 37px; display: grid; place-items: center; border-radius: 11px; color: #042a3b; background: linear-gradient(135deg, var(--cyan-2), var(--teal-2)); }
+    .floating-card strong { display: block; font-size: .75rem; }
+    .floating-card small { color: #91aabe; font-size: .61rem; }
+    .float-one { left: -25px; bottom: 34px; animation: float 5s ease-in-out infinite; }
+    .float-two { right: -18px; top: 0; animation: float 5.8s ease-in-out infinite reverse; }
+    @keyframes float { 50% { transform: translateY(-10px); } }
+
+    /* Logo cloud */
+    .proof-strip { margin-top: -1px; padding: 24px 0; color: #456173; border-bottom: 1px solid var(--line); background: #fff; }
+    .proof-grid { display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: center; }
+    .proof-grid > strong { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+    .proof-items { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+    .proof-items span { padding: 7px 12px; border-radius: 999px; color: #315167; font-size: .76rem; font-weight: 700; background: #eef5f8; }
+
+    /* EKR / HEM */
+    .definition-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 30px; align-items: stretch; }
+    .definition-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .definition-card { padding: 27px 23px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff; box-shadow: var(--shadow-sm); }
+    .number { width: 38px; height: 38px; display: grid; place-items: center; margin-bottom: 22px; border-radius: 12px; color: #08759e; font-family: Manrope; font-weight: 800; background: #e7f7fd; }
+    .definition-card h3 { margin-bottom: 11px; }
+    .definition-card p { color: var(--muted); font-size: .92rem; }
+    .residential-card { position: relative; padding: 38px; border-radius: var(--radius); color: #fff; background: linear-gradient(145deg, #0b253b, #0b3c4e); box-shadow: var(--shadow); overflow: hidden; }
+    .residential-card::after { content: "75%"; position: absolute; right: -12px; bottom: -36px; color: rgba(255,255,255,.055); font-family: Manrope; font-size: 8rem; font-weight: 800; letter-spacing: -.08em; }
+    .residential-card .badge { display: inline-flex; padding: 7px 10px; margin-bottom: 22px; border: 1px solid rgba(139,231,208,.28); border-radius: 999px; color: var(--teal-2); font-size: .72rem; font-weight: 800; background: rgba(19,200,162,.08); }
+    .residential-card h3 { max-width: 420px; margin-bottom: 16px; font-size: 1.72rem; }
+    .residential-card p { max-width: 500px; color: #b6cad7; }
+    .source-note { display: flex; align-items: flex-start; gap: 10px; margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); color: #8fa9bb; font-size: .75rem; }
+    .source-note svg { width: 17px; min-width: 17px; margin-top: 2px; }
+    .source-note a { color: #c6edf9; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Merchant bridge */
+    .merchant { padding-top: 0; }
+    .merchant-panel { display: grid; grid-template-columns: .88fr 1.12fr; border: 1px solid var(--line); border-radius: 28px; background: #fff; box-shadow: var(--shadow-sm); overflow: hidden; }
+    .merchant-copy { padding: 52px; }
+    .merchant-copy p { margin-top: 18px; color: var(--muted); }
+    .merchant-points { display: grid; gap: 16px; margin-top: 30px; }
+    .merchant-point { display: grid; grid-template-columns: 42px 1fr; gap: 14px; align-items: start; }
+    .merchant-point .icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; color: #0d7fa5; background: #e9f8fd; }
+    .merchant-point strong { display: block; margin-bottom: 3px; }
+    .merchant-point span { color: var(--muted); font-size: .9rem; }
+    .merchant-visual { position: relative; min-height: 510px; padding: 42px; color: #fff; background: linear-gradient(145deg, #0a2135, #103d51); overflow: hidden; display: flex; align-items: center; }
+    .merchant-visual::before { content: ""; position: absolute; width: 300px; height: 300px; right: -50px; top: -80px; border-radius: 50%; background: rgba(42,169,223,.19); filter: blur(60px); }
+    .merchant-flow { position: relative; z-index: 1; display: grid; gap: 14px; width: 100%; }
+    .merchant-step { display: grid; grid-template-columns: 44px 1fr auto; gap: 15px; align-items: center; padding: 17px; border: 1px solid rgba(255,255,255,.11); border-radius: 16px; background: rgba(255,255,255,.055); }
+    .merchant-step b { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px; color: #052b3a; background: linear-gradient(135deg, var(--cyan-2), var(--teal-2)); }
+    .merchant-step strong { display: block; font-size: .9rem; }
+    .merchant-step small { color: #93adbf; }
+    .merchant-step em { padding: 6px 8px; border-radius: 8px; color: var(--teal-2); font-size: .65rem; font-style: normal; font-weight: 800; background: rgba(19,200,162,.11); }
+    .merchant-result { margin-top: 8px; padding: 20px; border-radius: 18px; color: #083244; background: linear-gradient(135deg, #b8ecfb, #a8f1dc); }
+    .merchant-result small { font-weight: 700; opacity: .72; }
+    .merchant-result strong { display: block; margin-top: 6px; font-family: Manrope; font-size: 1.2rem; }
+
+    /* Lead engine */
+    .lead-grid { display: grid; grid-template-columns: .88fr 1.12fr; gap: 64px; align-items: center; }
+    .lead-copy p { margin: 22px 0 28px; color: #afc3d3; font-size: 1.05rem; }
+    .check-list { display: grid; gap: 13px; }
+    .check-list li { display: grid; grid-template-columns: 26px 1fr; gap: 11px; align-items: start; color: #dbe8f0; list-style: none; }
+    .check-list li::before { content: "✓"; width: 25px; height: 25px; display: grid; place-items: center; border-radius: 8px; color: #063645; font-weight: 900; background: var(--teal-2); }
+    .lead-demo { position: relative; padding: 28px; border: 1px solid rgba(255,255,255,.12); border-radius: 28px; background: rgba(255,255,255,.05); box-shadow: var(--shadow); }
+    .lead-demo-grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: 14px; }
+    .calc-card, .lead-queue { min-height: 410px; padding: 20px; border-radius: 20px; background: #fff; color: var(--text); }
+    .mock-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .mock-head strong { font-size: .88rem; }
+    .mock-head span { padding: 5px 8px; border-radius: 8px; color: #0e779a; font-size: .58rem; font-weight: 800; background: #e8f7fc; }
+    .field { display: grid; gap: 5px; margin-bottom: 10px; padding: 10px 12px; border: 1px solid #e1e8ed; border-radius: 12px; background: #fbfcfd; }
+    .field label { color: #8998a4; font-size: .57rem; }
+    .field span { font-size: .72rem; font-weight: 700; }
+    .mock-button { display: grid; place-items: center; height: 38px; margin-top: 14px; border-radius: 11px; color: #052a3a; font-size: .7rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan-2), var(--teal-2)); }
+    .calc-result { margin-top: 12px; padding: 13px; border-radius: 12px; color: #0a4a60; background: #eaf9fc; }
+    .calc-result small { display: block; font-size: .57rem; }
+    .calc-result strong { display: block; margin-top: 4px; font-size: .78rem; }
+    .lead-row { display: grid; grid-template-columns: 32px 1fr auto; gap: 10px; align-items: center; min-height: 61px; padding: 9px 0; border-bottom: 1px solid #e8eef2; }
+    .lead-row:last-child { border-bottom: 0; }
+    .lead-avatar { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px; color: #0a7598; font-size: .65rem; font-weight: 800; background: #e6f7fc; }
+    .lead-row strong { display: block; font-size: .68rem; }
+    .lead-row small { display: block; color: #8997a3; font-size: .55rem; }
+    .lead-row em { padding: 5px 7px; border-radius: 7px; color: #0e8d70; font-size: .54rem; font-style: normal; font-weight: 900; background: #e5faf3; }
+    .exclusive { display: flex; align-items: center; gap: 9px; margin-top: 14px; padding: 10px 12px; border: 1px solid #d7e8ee; border-radius: 12px; color: #496171; font-size: .61rem; background: #f7fafb; }
+    .exclusive b { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 8px; color: #fff; background: var(--ink-3); }
+
+    /* Platform role tabs */
+    .platform-layout { display: grid; grid-template-columns: 340px 1fr; gap: 30px; align-items: stretch; }
+    .role-tabs { display: grid; align-content: start; gap: 10px; }
+    .role-tab { width: 100%; display: grid; grid-template-columns: 46px 1fr auto; gap: 14px; align-items: center; padding: 15px; border: 1px solid var(--line); border-radius: 16px; text-align: left; color: var(--text); background: #fff; cursor: pointer; transition: border .2s, box-shadow .2s, transform .2s; }
+    .role-tab:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .role-tab.active { border-color: #8ed9f3; box-shadow: 0 14px 40px rgba(42,169,223,.12); }
+    .role-tab .role-icon { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; color: #0c7ca4; background: #e7f7fd; }
+    .role-tab strong { display: block; font-size: .9rem; }
+    .role-tab small { color: var(--muted); font-size: .7rem; }
+    .role-tab svg:last-child { width: 16px; color: #9aabb7; }
+    .platform-screen { position: relative; min-height: 535px; border: 1px solid var(--line); border-radius: 24px; background: #fff; box-shadow: var(--shadow-sm); overflow: hidden; }
+    .screen-top { height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid #e4ebef; background: #fbfcfd; }
+    .screen-top .crumb { display: flex; align-items: center; gap: 8px; color: #667b8b; font-size: .7rem; font-weight: 700; }
+    .screen-dots { display: flex; gap: 5px; }
+    .screen-dots i { width: 7px; height: 7px; border-radius: 50%; background: #cad6dd; }
+    .screen-content { padding: 26px; }
+    .screen-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+    .screen-heading h3 { font-size: 1.05rem; }
+    .screen-heading p { margin-top: 6px; color: var(--muted); font-size: .7rem; }
+    .screen-tag { padding: 7px 10px; border-radius: 9px; color: #0d7da3; font-size: .62rem; font-weight: 800; background: #e8f7fc; }
+    .role-panel { display: none; }
+    .role-panel.active { display: block; animation: fadeIn .28s ease; }
+    @keyframes fadeIn { from { opacity: .2; transform: translateY(5px); } }
+    .mock-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+    .mock-kpi { padding: 14px; border: 1px solid #e3ebef; border-radius: 14px; background: #fbfcfd; }
+    .mock-kpi span { color: #7c8d99; font-size: .58rem; }
+    .mock-kpi strong { display: block; margin-top: 8px; font-size: .78rem; }
+    .mock-table { border: 1px solid #e3ebef; border-radius: 14px; overflow: hidden; }
+    .mock-table-row { display: grid; grid-template-columns: 1.15fr .9fr .8fr .75fr; gap: 8px; align-items: center; min-height: 51px; padding: 0 13px; border-bottom: 1px solid #e7edf1; font-size: .62rem; }
+    .mock-table-row:last-child { border-bottom: 0; }
+    .mock-table-row.header { min-height: 34px; color: #82919b; font-size: .54rem; font-weight: 800; text-transform: uppercase; background: #f7f9fa; }
+    .mock-table-row strong { font-size: .64rem; }
+    .mini-status { width: fit-content; padding: 5px 8px; border-radius: 999px; font-size: .53rem; font-weight: 800; }
+    .mini-status.cyan { color: #0b80a7; background: #e8f7fc; }
+    .mini-status.green { color: #0f8d70; background: #e8faf4; }
+    .mini-status.orange { color: #a66a0a; background: #fff3df; }
+    .panel-note { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding: 12px 14px; border-radius: 12px; color: #496172; font-size: .65rem; background: #f0f7f9; }
+    .panel-note svg { width: 16px; color: #1586ad; }
+
+    /* Process */
+    .process-track { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0; position: relative; }
+    .process-track::before { content: ""; position: absolute; left: 5%; right: 5%; top: 34px; height: 2px; background: linear-gradient(90deg, var(--cyan), var(--teal)); opacity: .55; }
+    .process-step { position: relative; z-index: 1; padding: 0 10px; text-align: center; }
+    .process-icon { width: 68px; height: 68px; display: grid; place-items: center; margin: 0 auto 19px; border: 7px solid var(--mist); border-radius: 22px; color: #0d7ea5; background: #fff; box-shadow: 0 10px 25px rgba(17,59,84,.09); }
+    .process-step strong { display: block; font-size: .82rem; }
+    .process-step span { display: block; margin-top: 7px; color: var(--muted); font-size: .7rem; line-height: 1.45; }
+
+    /* Feature grid */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature-card { min-height: 215px; padding: 28px; border: 1px solid var(--line); border-radius: 19px; background: #fff; transition: transform .2s ease, box-shadow .2s ease, border .2s ease; }
+    .feature-card:hover { transform: translateY(-4px); border-color: #a8dff1; box-shadow: var(--shadow-sm); }
+    .feature-icon { width: 45px; height: 45px; display: grid; place-items: center; margin-bottom: 22px; border-radius: 14px; color: #0b7fa7; background: #e8f8fd; }
+    .feature-card h3 { margin-bottom: 10px; font-size: 1rem; }
+    .feature-card p { color: var(--muted); font-size: .85rem; }
+
+
+
+    /* Single-block EKR / HEM explanation */
+    .definition-copy {
+      display: flex;
+      align-items: center;
+      padding: 42px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+    }
+    .definition-copy p { margin: 0; color: #42586a; font-size: 1.02rem; line-height: 1.82; }
+    .definition-copy strong { color: var(--ink); }
+
+    /* Expanded merchant value proposition */
+    .merchant-visual { min-height: 590px; }
+    .merchant-note { margin-top: 18px; padding: 13px 15px; border-left: 3px solid var(--cyan); border-radius: 0 10px 10px 0; color: #6e7f8d; font-size: .76rem; background: #f4f9fb; }
+
+    /* Role-based feature catalogue */
+    .feature-index { display: flex; flex-wrap: wrap; gap: 9px; margin: 28px 0 0; }
+    .feature-index a { padding: 9px 13px; border: 1px solid var(--line); border-radius: 999px; color: #36566a; font-size: .75rem; font-weight: 800; background: #fff; transition: border .2s, transform .2s, box-shadow .2s; }
+    .feature-index a:hover { transform: translateY(-1px); border-color: #95d9ef; box-shadow: var(--shadow-sm); }
+    .feature-groups { display: grid; gap: 66px; }
+    .feature-group { scroll-margin-top: 105px; }
+    .feature-group-head { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; margin-bottom: 22px; }
+    .feature-role-badge { min-width: 54px; height: 54px; display: grid; place-items: center; border-radius: 17px; color: #0b7fa7; font-family: Manrope; font-size: 1.2rem; font-weight: 800; background: #e8f8fd; }
+    .feature-group-head h3 { margin-bottom: 7px; font-size: 1.55rem; }
+    .feature-group-head p { margin: 0; max-width: 850px; color: var(--muted); font-size: .94rem; }
+    .feature-count { display: inline-flex; width: fit-content; margin-top: 9px; padding: 5px 9px; border-radius: 999px; color: #0d7da3; font-size: .64rem; font-weight: 800; background: #e8f7fc; }
+    .feature-groups .feature-card { min-height: 190px; }
+    .feature-card .feature-owner { display: inline-flex; margin-bottom: 11px; color: #628094; font-size: .62rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .feature-group.role-auditor .feature-role-badge,
+    .feature-group.role-auditor .feature-icon { color: #6d4ecb; background: #f0ebff; }
+    .feature-group.role-jogosult .feature-role-badge,
+    .feature-group.role-jogosult .feature-icon { color: #0b7fa7; background: #e8f8fd; }
+    .feature-group.role-szervezo .feature-role-badge,
+    .feature-group.role-szervezo .feature-icon { color: #0b8b6e; background: #e8faf4; }
+    .feature-group.role-kivitelezo .feature-role-badge,
+    .feature-group.role-kivitelezo .feature-icon { color: #a66a0a; background: #fff3df; }
+    .feature-group.role-kozos .feature-role-badge,
+    .feature-group.role-kozos .feature-icon { color: #315b7b; background: #edf3f7; }
+
+    /* Optional support service */
+    .support-section { padding-top: 0; }
+    .support-panel { position: relative; display: grid; grid-template-columns: .88fr 1.12fr; gap: 54px; align-items: center; padding: 58px; border: 1px solid var(--line); border-radius: 30px; background: linear-gradient(145deg, #f7fbfd, #edf7fa); box-shadow: var(--shadow-sm); overflow: hidden; }
+    .support-panel::after { content: ""; position: absolute; width: 360px; height: 360px; right: -120px; top: -170px; border-radius: 50%; background: rgba(42,169,223,.12); filter: blur(20px); }
+    .support-panel > * { position: relative; z-index: 1; }
+    .support-copy p { margin-top: 18px; color: var(--muted); }
+    .support-label { display: inline-flex; margin-top: 7px; padding: 7px 11px; border-radius: 999px; color: #0d7da3; font-size: .68rem; font-weight: 800; background: #e4f5fb; }
+    .support-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
+    .support-item { min-height: 145px; padding: 20px; border: 1px solid #d8e8ee; border-radius: 17px; background: rgba(255,255,255,.82); }
+    .support-item b { width: 36px; height: 36px; display: grid; place-items: center; margin-bottom: 13px; border-radius: 11px; color: #0c7da3; background: #e6f7fc; }
+    .support-item strong { display: block; margin-bottom: 5px; font-size: .88rem; }
+    .support-item span { color: var(--muted); font-size: .76rem; line-height: 1.5; }
+
+    /* Mobile application release badges */
+    .mobile-release { margin-top: 24px; }
+    .mobile-release > strong { display: block; margin-bottom: 10px; color: #e4f2f8; font-size: .82rem; }
+    .store-badges { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .store-badge { display: flex; align-items: center; gap: 10px; min-height: 54px; padding: 10px 13px; border: 1px solid rgba(255,255,255,.14); border-radius: 13px; color: #dcebf2; background: rgba(255,255,255,.055); }
+    .store-badge b { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px; color: #062f41; background: var(--cyan-2); }
+    .store-badge span { display: grid; line-height: 1.15; }
+    .store-badge small { color: #91aabd; font-size: .58rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+    .store-badge strong { margin-top: 3px; font-size: .72rem; }
+
+
+    /* Benefits */
+    .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+    .benefit-copy p { margin: 20px 0 30px; color: #adc1d1; }
+    .benefit-list { display: grid; gap: 14px; }
+    .benefit-item { display: grid; grid-template-columns: 42px 1fr; gap: 14px; align-items: start; }
+    .benefit-item b { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; color: #062f41; background: linear-gradient(135deg, var(--cyan-2), var(--teal-2)); }
+    .benefit-item strong { display: block; font-size: .9rem; }
+    .benefit-item span { color: #91aabd; font-size: .8rem; }
+    .architecture { position: relative; min-height: 470px; }
+    .arch-core { position: absolute; left: 50%; top: 50%; width: 180px; height: 180px; display: grid; place-items: center; transform: translate(-50%, -50%); border: 1px solid rgba(255,255,255,.15); border-radius: 50%; text-align: center; background: rgba(255,255,255,.06); box-shadow: 0 0 80px rgba(42,169,223,.18); }
+    .arch-core::before, .arch-core::after { content: ""; position: absolute; border: 1px solid rgba(120,213,244,.16); border-radius: 50%; }
+    .arch-core::before { inset: -38px; }
+    .arch-core::after { inset: -76px; }
+    .arch-core strong { font-size: 1.15rem; }
+    .arch-core small { display: block; color: #91aabd; font-size: .65rem; }
+    .arch-node { position: absolute; min-width: 135px; padding: 13px 15px; border: 1px solid rgba(255,255,255,.13); border-radius: 14px; background: rgba(255,255,255,.06); box-shadow: 0 12px 35px rgba(0,0,0,.18); backdrop-filter: blur(12px); }
+    .arch-node strong { display: block; font-size: .76rem; }
+    .arch-node small { color: #8fa8ba; font-size: .62rem; }
+    .node-1 { left: 0; top: 55px; }
+    .node-2 { right: 0; top: 55px; }
+    .node-3 { left: -5px; bottom: 55px; }
+    .node-4 { right: -5px; bottom: 55px; }
+    .arch-line { position: absolute; left: 50%; top: 50%; width: 250px; height: 1px; transform-origin: left center; background: linear-gradient(90deg, rgba(120,213,244,.6), transparent); }
+    .line-1 { transform: rotate(212deg); }
+    .line-2 { transform: rotate(328deg); }
+    .line-3 { transform: rotate(148deg); }
+    .line-4 { transform: rotate(32deg); }
+
+    /* Demo CTA */
+    .demo-panel { display: grid; grid-template-columns: 1.15fr .85fr; gap: 50px; align-items: center; padding: 58px; border-radius: 30px; color: #fff; background: linear-gradient(135deg, #0a2338, #0d4053); box-shadow: var(--shadow); overflow: hidden; }
+    .demo-panel::after { content: ""; position: absolute; width: 420px; height: 420px; right: -120px; top: -170px; border-radius: 50%; background: rgba(42,169,223,.18); filter: blur(20px); }
+    .demo-panel > * { position: relative; z-index: 1; }
+    .demo-panel p { max-width: 680px; margin-top: 18px; color: #b4c9d6; }
+    .demo-actions { display: grid; gap: 12px; }
+    .demo-actions .btn { width: 100%; }
+    .demo-actions small { color: #91aabd; text-align: center; font-size: .7rem; }
+
+    /* FAQ */
+    .faq-list { max-width: 900px; margin: 0 auto; border-top: 1px solid var(--line); }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 25px; padding: 23px 0; border: 0; text-align: left; color: var(--text); background: transparent; cursor: pointer; }
+    .faq-question strong { font-family: Manrope; font-size: 1rem; }
+    .faq-question span { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px; color: #0d7ea5; background: #e8f7fc; transition: transform .2s; }
+    .faq-item.open .faq-question span { transform: rotate(45deg); }
+    .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .26s ease; }
+    .faq-answer > div { overflow: hidden; }
+    .faq-item.open .faq-answer { grid-template-rows: 1fr; }
+    .faq-answer p { padding: 0 54px 22px 0; color: var(--muted); }
+
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 55px; align-items: start; }
+    .contact-copy p { margin: 20px 0 30px; color: #afc4d2; }
+    .contact-types { display: grid; gap: 10px; }
+    .contact-type { display: flex; align-items: center; gap: 12px; padding: 13px 15px; border: 1px solid rgba(255,255,255,.11); border-radius: 14px; color: #d8e7ef; background: rgba(255,255,255,.045); }
+    .contact-type b { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px; color: #062f41; background: var(--cyan-2); }
+    .contact-form { padding: 30px; border: 1px solid rgba(255,255,255,.12); border-radius: 24px; background: rgba(255,255,255,.055); backdrop-filter: blur(14px); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: grid; gap: 7px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { color: #b5c8d5; font-size: .73rem; font-weight: 700; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; border: 1px solid rgba(255,255,255,.13); border-radius: 12px; outline: 0; color: #fff; background: rgba(5,18,30,.42); transition: border .2s, box-shadow .2s; }
+    .form-group input, .form-group select { height: 48px; padding: 0 13px; }
+    .form-group textarea { min-height: 120px; padding: 13px; resize: vertical; }
+    .form-group select option { color: #12283a; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--cyan-2); box-shadow: 0 0 0 3px rgba(120,213,244,.12); }
+    .form-check { display: flex; gap: 9px; align-items: flex-start; margin: 16px 0; color: #98afbf; font-size: .68rem; }
+    .form-check input { margin-top: 3px; accent-color: var(--cyan); }
+    .form-status { min-height: 22px; margin-top: 12px; color: var(--teal-2); font-size: .74rem; }
+
+    /* Footer */
+    .site-footer { padding: 38px 0 22px; color: #8ca5b7; background: #04101c; }
+    .footer-top { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; padding-bottom: 26px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .footer-brand { display: flex; align-items: center; gap: 13px; }
+    .footer-brand .brand-mark { width: 34px; height: 34px; }
+    .footer-brand strong { color: #fff; font-family: Manrope; }
+    .footer-brand span { display: block; font-size: .7rem; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 18px; font-size: .75rem; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 25px; padding-top: 20px; font-size: .66rem; }
+    .footer-bottom p { margin: 0; max-width: 760px; }
+
+    /* Reveal */
+    [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    [data-reveal].is-visible { opacity: 1; transform: none; }
+
+    /* Responsive */
+    @media (max-width: 1080px) {
+      .nav-links { gap: 17px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero-grid { grid-template-columns: 1fr; gap: 45px; }
+      .hero { padding-top: 145px; }
+      .hero-copy { max-width: 830px; }
+      .hero-visual { min-height: 540px; max-width: 800px; width: 100%; margin: 0 auto; }
+      .definition-grid, .lead-grid, .benefit-grid, .support-panel { grid-template-columns: 1fr; }
+      .merchant-panel { grid-template-columns: 1fr; }
+      .merchant-visual { min-height: auto; }
+      .platform-layout { grid-template-columns: 1fr; }
+      .role-tabs { grid-template-columns: repeat(3, 1fr); }
+      .role-tab { grid-template-columns: 40px 1fr; }
+      .role-tab svg:last-child { display: none; }
+      .process-track { grid-template-columns: repeat(4, 1fr); gap: 28px 0; }
+      .process-track::before { display: none; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .demo-panel { grid-template-columns: 1fr; }
+      .demo-actions { grid-template-columns: 1fr 1fr; }
+      .demo-actions small { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 760px) {
+      .section { padding: 80px 0; }
+      .container { width: min(calc(100% - 28px), var(--container)); }
+      .site-header { padding: 11px 0; background: rgba(7,21,36,.82); backdrop-filter: blur(16px); }
+      .brand-copy small { display: none; }
+      .nav-links { position: fixed; inset: 68px 14px auto; display: none; align-items: stretch; gap: 4px; padding: 13px; border: 1px solid rgba(255,255,255,.11); border-radius: 18px; background: rgba(7,21,36,.96); box-shadow: var(--shadow); }
+      .menu-open .nav-links { display: grid; }
+      .nav-links a:not(.nav-cta) { display: block; padding: 11px 12px; border-radius: 10px; }
+      .nav-links a:hover { background: rgba(255,255,255,.06); }
+      .nav-cta { margin-top: 4px; justify-content: center; }
+      .menu-toggle { display: grid; }
+      .hero { min-height: auto; padding: 125px 0 72px; }
+      .hero h1 { font-size: clamp(2.55rem, 12vw, 4.4rem); }
+      .hero-actions .btn { width: 100%; }
+      .hero-audience { display: grid; }
+      .hero-visual { min-height: 445px; }
+      .app-window { inset: 18px -85px auto -5px; transform: scale(.82); transform-origin: left top; }
+      .float-one { left: -5px; bottom: 0; }
+      .float-two { right: 0; top: -8px; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .proof-items { justify-content: flex-start; }
+      .definition-cards { grid-template-columns: 1fr; }
+      .residential-card { padding: 29px; }
+      .merchant-copy { padding: 34px 25px; }
+      .merchant-visual { padding: 25px; }
+      .merchant-step { grid-template-columns: 40px 1fr; }
+      .merchant-step em { display: none; }
+      .lead-demo { padding: 14px; }
+      .lead-demo-grid { grid-template-columns: 1fr; }
+      .calc-card, .lead-queue { min-height: auto; }
+      .role-tabs { grid-template-columns: 1fr; }
+      .platform-screen { min-height: 500px; }
+      .screen-content { padding: 17px; }
+      .mock-kpis { grid-template-columns: 1fr; }
+      .mock-table-row { grid-template-columns: 1.2fr .8fr .7fr; }
+      .mock-table-row > :nth-child(3) { display: none; }
+      .process-track { grid-template-columns: repeat(2, 1fr); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-group-head { grid-template-columns: 1fr; }
+      .support-panel { padding: 34px 25px; }
+      .support-items { grid-template-columns: 1fr; }
+      .store-badges { grid-template-columns: 1fr; }
+      .architecture { min-height: 430px; transform: scale(.86); margin: -25px; }
+      .demo-panel { padding: 34px 25px; }
+      .demo-actions { grid-template-columns: 1fr; }
+      .form-grid, .contact-grid { grid-template-columns: 1fr; }
+      .footer-top, .footer-bottom { grid-template-columns: 1fr; display: grid; }
+      .footer-links { justify-content: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      [data-reveal] { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top" aria-label="HEMApp kezdőlap">
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7adbf7"/><stop offset="1" stop-color="#55e2c8"/></linearGradient></defs>
+          <path d="M24 3.5 42 14v20L24 44.5 6 34V14Z" fill="none" stroke="url(#lg)" stroke-width="2.4"/>
+          <path d="M14 16.5 24 10l10 6.5-10 6.4Z" fill="url(#lg)" opacity=".94"/>
+          <path d="M14 20.4 22 25v10.2l-8-4.6Zm20 0-8 4.6v10.2l8-4.6Z" fill="url(#lg)" opacity=".76"/>
+        </svg>
+        <span class="brand-copy"><strong>HEMAPP</strong><small>Energiahatékonysági projektplatform</small></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Fő navigáció">
+        <a href="#ekr-hem">EKR és HEM</a>
+        <a href="#leadmotor">Leadmotor</a>
+        <a href="#platform">Rendszer</a>
+        <a href="#folyamat">Folyamat</a>
+        <a href="#funkciok">Funkciók</a>
+        <a href="#support">Support</a>
+        <a class="nav-cta" href="#kapcsolat">Bemutatót kérek</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menü megnyitása" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <span class="eyebrow">HEM projektinfrastruktúra nagy volumenre</span>
+          <h1>A lakossági leadtől a <span>HEM megvalósításáig.</span></h1>
+          <p class="hero-lead">Egy közös platform, ahol az első számú jogosultak, szervezők, auditorok és kivitelezők szerepkörüknek megfelelően, összehangoltan és tömegesen kezelhetik energiahatékonysági projektjeiket.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://hemapp.hu/" target="_blank" rel="noopener">
+              Kivitelezői demórendszer kipróbálása
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn-secondary" href="#kapcsolat">Jogosulti / auditori bemutató</a>
+          </div>
+          <div class="hero-audience">
+            <strong>Egy rendszerben:</strong>
+            <div class="audience-list"><span>Auditor</span><span>Első számú jogosult</span><span>Szervező</span><span>Kivitelező</span><span>Lakossági megrendelő</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="HEMApp projektkezelő felület illusztrációja" data-reveal>
+          <div class="glow"></div>
+          <div class="app-window">
+            <div class="window-bar"><div class="window-dots"><i></i><i></i><i></i></div><span class="window-title">HEMApp · Projektportfólió</span><span></span></div>
+            <div class="app-body">
+              <aside class="app-sidebar">
+                <div class="side-logo"><b>H</b> HEMAPP</div>
+                <div class="side-nav">
+                  <span><i></i>Kezdőlap</span><span><i></i>Szervezet</span><span><i></i>Kalkulátor</span><span><i></i>Folyamatrend</span><span class="active"><i></i>Auditok</span><span><i></i>Projektek</span><span><i></i>Dokumentumok</span>
+                </div>
+              </aside>
+              <div class="app-main">
+                <div class="app-top"><div><h4>Projektportfólió</h4><small>Tömeges ellenőrzés és audit</small></div><div class="mini-tabs"><span class="active">Beküldött</span><span>Jóváhagyott</span><span>Kötegek</span></div></div>
+                <div class="app-stats"><div class="app-stat"><small>Adat és dokumentum</small><strong>Automatikus kontroll</strong><div class="line"></div></div><div class="app-stat"><small>Szerepkörök</small><strong>Összehangolt munka</strong><div class="line" style="width:82%"></div></div><div class="app-stat"><small>Projektút</small><strong>Lead → MEKH-bejegyzés</strong><div class="line" style="width:91%"></div></div></div>
+                <div class="project-table">
+                  <div class="project-row head"><span>Projekt</span><span>Kivitelező</span><span>HEM</span><span>Státusz</span></div>
+                  <div class="project-row"><strong>#2607-K14</strong><span>Partnerhálózat A</span><span>Hitelesítésre kész</span><span class="status amber">Ellenőrzés</span></div>
+                  <div class="project-row"><strong>#2607-P28</strong><span>Partnerhálózat B</span><span>Audit alatt</span><span class="status blue">Beküldött</span></div>
+                  <div class="project-row"><strong>#2606-L05</strong><span>Partnerhálózat A</span><span>Köteghez rendelhető</span><span class="status green">Jóváhagyva</span></div>
+                  <div class="project-row"><strong>#2606-M31</strong><span>Partnerhálózat C</span><span>Dokumentáció</span><span class="status amber">Hiánypótlás</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-card float-one"><span class="icon-box">✓</span><div><strong>Beküldés előtti kontroll</strong><small>Kötelező mezők és dokumentumok</small></div></div>
+          <div class="floating-card float-two"><span class="icon-box">↗</span><div><strong>Leadből projekt</strong><small>Saját kivitelezői partnerkörben</small></div></div>
+        </div>
       </div>
-    </header>
+    </section>
 
-    <main id="tartalom">
-      <!-- ============ HERO ============ -->
-      <section class="hero">
-        <div class="wrap hero__inner">
-          <div>
-            <p class="eyebrow">Lakossági HEM-elszámolás · 17/2020. MEKH-rendelet</p>
-            <h1>Egy projekt.<br />Egy rendszer.<br /><em>Minden szereplő.</em></h1>
-            <p class="hero__lead">
-              A HEMapp a HEM-projekt teljes útját kezeli: a kivitelező a
-              helyszínen rögzít, a jogosult ellenőriz és jóváhagy, az auditor
-              hitelesít — ugyanazon a projekten, ugyanabban a rendszerben.
-              Nincs több e-mailben küldött táblázat és külön partnerportál.
-            </p>
-
-            <div class="hero__cta">
-              <a class="btn btn--primary" href="https://demo.hemapp.hu" rel="noopener">
-                Demó megnyitása
-              </a>
-              <a class="btn btn--ghost" href="#kapcsolat">Kapcsolatfelvétel</a>
-            </div>
-
-            <div class="hero__facts">
-              <span><b>6</b> szerepkör, egy felület</span>
-              <span><b>Rendelet szerinti</b> HEM-számítás</span>
-              <span><b>E-aláírás</b> a rendszerben</span>
-            </div>
-          </div>
-
-          <!-- The most characteristic artifact of this product: a project sheet. -->
-          <div class="sheet" role="group" aria-label="Minta projekt adatlap">
-            <div class="sheet__top">
-              <span>Projekt · HEM-2026-0431</span>
-              <span class="sheet__tag">minta</span>
-            </div>
-            <dl class="sheet__body">
-              <div class="sheet__row">
-                <dt>Kivitelezési helyszín</dt>
-                <dd>1114 Budapest</dd>
-              </div>
-              <div class="sheet__row">
-                <dt>Beavatkozás</dt>
-                <dd>Klíma · 3 helyiség</dd>
-              </div>
-              <div class="sheet__row">
-                <dt>Beltéri egységek</dt>
-                <dd>3 db · 7,1 kW</dd>
-              </div>
-              <div class="sheet__row">
-                <dt>Dokumentumok</dt>
-                <dd>8 / 8 feltöltve</dd>
-              </div>
-              <div class="sheet__calc">
-                <span>Számított energiamegtakarítás</span>
-                <strong>4 812<small>kWh / év</small></strong>
-              </div>
-            </dl>
-            <div class="sheet__foot">
-              <span class="pill" style="--st: var(--st-verified)">Hitelesítve</span>
-              <span>Auditori jóváhagyás után kötegbe került</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ WHY ============ -->
-      <section class="section section--paper" id="miert">
-        <div class="wrap">
-          <div class="section-head">
-            <p class="eyebrow">Miért készült</p>
-            <h2 class="h2">A hiánypótlás nem a beadásnál keletkezik.</h2>
-            <p class="lead">
-              Egy HEM-projekt ma átlagosan három-négy rendszert jár be, mire
-              elszámolható lesz. Minden átadás egy újabb hely, ahol adat
-              vészik el, és minden elveszett adat egy hiánypótlási kör.
-            </p>
-          </div>
-
-          <div class="problems">
-            <div class="problem">
-              <h3>Három rendszer, egy projekt</h3>
-              <p>
-                A felmérés táblázatban, a szerződés szövegszerkesztőben, a
-                fotók e-mailben, a beadás egy negyedik felületen. Aki
-                összefűzi, az kézzel másol — és a kézi másolás hibázik.
-              </p>
-            </div>
-            <div class="problem">
-              <h3>A hiba a helyszínen születik</h3>
-              <p>
-                Egy hiányzó fotó vagy elírt teljesítmény a felmérésnél kerül a
-                rendszerbe, de csak a beadásnál derül ki. A javítás ilyenkor
-                már új kiszállás és hetek csúszás.
-              </p>
-            </div>
-            <div class="problem">
-              <h3>A HEM-érték nem vélemény</h3>
-              <p>
-                A megtakarítás számítását a rendelet meghatározza. Ha
-                táblázatban készül, minden sorát ellenőrizni kell; ha a
-                rendszer számolja a rögzített adatokból, elég auditálni.
-              </p>
-            </div>
-          </div>
-
-          <div class="diff">
-            <div class="diff__item">
-              <h3><span class="mark" aria-hidden="true">1</span>Egy platform, minden szereplő</h3>
-              <p>
-                Nem külön kivitelezői portál és külön auditori felület: egy
-                projekt, szerepkör szerinti hozzáféréssel. Ki mit lát és mit
-                módosíthat, azt az adatbázis dönti el, nem a felület.
-              </p>
-            </div>
-            <div class="diff__item">
-              <h3><span class="mark" aria-hidden="true">2</span>Beépített, rendelet szerinti számítás</h3>
-              <p>
-                Az energiamegtakarítás a rögzített helyiség-, teljesítmény- és
-                anyagadatokból automatikusan áll elő, és a projekt adatainak
-                változásakor újraszámolódik. Nincs külön kalkulációs fájl.
-              </p>
-            </div>
-            <div class="diff__item">
-              <h3><span class="mark" aria-hidden="true">3</span>Szerződés és e-aláírás bent</h3>
-              <p>
-                A szerződés sablonból, a projekt adataival generálódik, az
-                ügyfél e-mailben kapott linken írja alá. Nincs nyomtatás,
-                szkennelés, visszaküldés.
-              </p>
-            </div>
-            <div class="diff__item">
-              <h3><span class="mark" aria-hidden="true">4</span>Dokumentumkövetelmény folyamatrendenként</h3>
-              <p>
-                Minden jogosultnak más a dokumentumlistája. A rendszer a
-                projekt folyamatrendjéhez tartozó sablonokat és kötelező
-                dokumentumtípusokat kéri — így a hiány a feltöltésnél derül
-                ki, nem a beadásnál.
-              </p>
-            </div>
-            <div class="diff__item">
-              <h3><span class="mark" aria-hidden="true">5</span>Kötegelt beadás, végig követhetően</h3>
-              <p>
-                A hitelesített projektek kötegbe kerülnek, a köteg állapota
-                és tartalma követhető. Minden státuszváltás naplózott: látszik,
-                ki mit és mikor hagyott jóvá.
-              </p>
-            </div>
-            <div class="diff__item">
-              <h3><span class="mark" aria-hidden="true">6</span>Terepen is használható</h3>
-              <p>
-                A felület telefonon is teljes értékű, nem lekicsinyített
-                asztali nézet. A kivitelezőknek külön terepi alkalmazás
-                készül, offline felméréssel.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ FEATURES ============ -->
-      <section class="section" id="funkciok">
-        <div class="wrap">
-          <div class="section-head">
-            <p class="eyebrow">Funkciók</p>
-            <h2 class="h2">Amit a rendszer elvégez</h2>
-            <p class="lead">
-              A HEMapp a napi működésre készült: projektnyitástól az
-              elszámolható, hitelesített projektig. A fejlesztés alatt álló
-              részeket jelöljük.
-            </p>
-          </div>
-
-          <div class="features">
-            <article class="feature">
-              <h3>Projektkezelés és státuszkövetés</h3>
-              <p>
-                Projektlista szűrőkkel és kereséssel, teljes adatlap,
-                automatikus státuszkezelés és intézkedést igénylő projektek
-                kiemelése.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>Terepi felmérés és fotódokumentáció</h3>
-              <p>
-                Helyiségenkénti klímarögzítés (beltéri/kültéri egység,
-                teljesítmény, nyílászárók), szigetelési adatok, kötelező
-                fotók és dokumentumok feltöltése.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>HEM-kalkulátor</h3>
-              <p>
-                Rendelet szerinti EKR-számítás: ingatlantípus, éghajlati zóna,
-                beavatkozás és teljesítmény alapján azonnali megtakarítási
-                érték — ajánlatadás előtt is.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>Szerződés és elektronikus aláírás</h3>
-              <p>
-                Sablonszerkesztő, a projekt adataival kitöltött szerződés,
-                PDF-generálás és e-mailes aláírási link. Aláírás után az
-                érintett adatok zárolhatók.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>Folyamatrendek és dokumentumsablonok</h3>
-              <p>
-                Jogosultanként külön folyamatrend: saját dokumentumtípusok,
-                sablonok és követelmények, központilag szerkeszthetően.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>Hiánypótlás-kezelés</h3>
-              <p>
-                Az auditor vagy a jogosult a projekten írja ki a hiányt, a
-                kivitelező ugyanott javítja. A kör zárt, nyomon követhető, és
-                nem e-mailben zajlik.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>Auditálás és kötegek</h3>
-              <p>
-                Auditori munkalista, hitelesítés, valamint a jóváhagyott
-                projektek beadási kötegekbe rendezése és követése.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>Controlling és számlázhatóság</h3>
-              <p>
-                A hitelesített projektek elszámolható állapotba kerülnek;
-                projektszintű pénzügyi áttekintés a kivitelezői díjjal és a
-                támogatási értékekkel.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>Anyagkatalógus</h3>
-              <p>
-                Központi anyag- és berendezéslista a számításhoz szükséges
-                műszaki paraméterekkel, kereshetően.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>Szervezet-, csapat- és jogosultságkezelés</h3>
-              <p>
-                Cégcsoportok, kivitelezői csapatok, tagok és szerepkörök;
-                szervezeti regisztráció és jóváhagyás.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>
-                Értékesítés
-                <span class="tag tag--soon">Fejlesztés alatt</span>
-              </h3>
-              <p>
-                Érdeklődések, ajánlatkészítés és HEM-piac: az érdeklődéstől a
-                megnyitott projektig egy folyamatban.
-              </p>
-            </article>
-            <article class="feature">
-              <h3>
-                Terepi mobilalkalmazás
-                <span class="tag tag--soon">Fejlesztés alatt</span>
-              </h3>
-              <p>
-                iOS- és Android-alkalmazás a kivitelezőknek, offline
-                felméréssel: a rögzítés hálózat nélkül is megy, a rendszer
-                utólag szinkronizál.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ SIGNATURE: lifecycle track ============ -->
-      <section class="section section--ink" id="folyamat">
-        <div class="wrap">
-          <div class="section-head">
-            <p class="eyebrow">A projekt útja</p>
-            <h2 class="h2">Egy projekt, hét állapot, négy szereplő</h2>
-            <p class="lead">
-              A HEMapp-ban a projekt állapota mondja meg, kinél van a labda. A
-              státuszváltás jogosultsághoz kötött, és minden lépés naplózott.
-            </p>
-          </div>
-
-          <div class="track" tabindex="0" role="group" aria-label="Projekt életciklus">
-            <div class="step" style="--st: var(--st-wait)">
-              <span class="step__dot" aria-hidden="true"></span>
-              <span class="step__idx">01</span>
-              <span class="pill" style="--st: var(--st-wait)">Várakozik</span>
-              <span class="step__who">Kivitelező</span>
-              <p>
-                Projektnyitás, terepi felmérés, ügyféladatok, szerződés és
-                dokumentumok feltöltése.
-              </p>
-            </div>
-
-            <div class="step" style="--st: var(--st-check)">
-              <span class="step__dot" aria-hidden="true"></span>
-              <span class="step__idx">02</span>
-              <span class="pill" style="--st: var(--st-check)">Ellenőrzés</span>
-              <span class="step__who">Jogosult / üzemeltetés</span>
-              <p>
-                Belső ellenőrzés beküldés előtt: a hiányzó vagy hibás adat itt
-                még javítható, auditori kör nélkül.
-              </p>
-            </div>
-
-            <div class="step" style="--st: var(--st-sent)">
-              <span class="step__dot" aria-hidden="true"></span>
-              <span class="step__idx">03</span>
-              <span class="pill" style="--st: var(--st-sent)">Beküldve</span>
-              <span class="step__who">Auditor</span>
-              <p>
-                A projekt auditori munkalistára kerül a teljes
-                dokumentációval és a számított megtakarítással.
-              </p>
-            </div>
-
-            <div class="step step--branch" style="--st: var(--st-issue)">
-              <span class="step__dot" aria-hidden="true"></span>
-              <span class="step__idx">visszakör</span>
-              <span class="pill" style="--st: var(--st-issue)">Hiánypótlás</span>
-              <span class="step__who">Kivitelező</span>
-              <p>
-                Konkrét, tételes hiánylista a projekten. Javítás után egy
-                gombbal megy vissza ellenőrzésre.
-              </p>
-            </div>
-
-            <div class="step" style="--st: var(--st-approved)">
-              <span class="step__dot" aria-hidden="true"></span>
-              <span class="step__idx">04</span>
-              <span class="pill" style="--st: var(--st-approved)">Jóváhagyva</span>
-              <span class="step__who">Auditor</span>
-              <p>
-                Az audit lezárult, a projekt megfelel a folyamatrend
-                követelményeinek.
-              </p>
-            </div>
-
-            <div class="step" style="--st: var(--st-verified)">
-              <span class="step__dot" aria-hidden="true"></span>
-              <span class="step__idx">05</span>
-              <span class="pill" style="--st: var(--st-verified)">Hitelesítve</span>
-              <span class="step__who">Jogosult</span>
-              <p>
-                A hitelesített projekt beadási kötegbe kerül, a köteg
-                állapota végig követhető.
-              </p>
-            </div>
-
-            <div class="step" style="--st: var(--st-billable)">
-              <span class="step__dot" aria-hidden="true"></span>
-              <span class="step__idx">06</span>
-              <span class="pill" style="--st: var(--st-billable)">Jogosult</span>
-              <span class="step__who">Controlling</span>
-              <p>
-                A projekt elszámolható: a kivitelezői díj és a támogatási
-                értékek egy helyen látszanak.
-              </p>
-            </div>
-          </div>
-
-          <p class="track__note">
-            <b>A státuszok a rendszer valódi állapotai</b> — nem marketing
-            ábra. Az elutasított projekt külön állapotba kerül indoklással, a
-            jogosulti hiánypótlás pedig ugyanezen a nyomvonalon fut, csak más
-            szereplővel.
-          </p>
-        </div>
-      </section>
-
-      <!-- ============ AUDIENCE ============ -->
-      <section class="section section--paper" id="kinek">
-        <div class="wrap">
-          <div class="section-head">
-            <p class="eyebrow">Kinek szól</p>
-            <h2 class="h2">Ugyanaz a projekt, más nézet</h2>
-            <p class="lead">
-              A HEM-elszámolás minden szereplője ugyanabban az
-              alkalmazásban dolgozik. Nincs adatátadás rendszerek között, mert
-              nincs másik rendszer.
-            </p>
-          </div>
-
-          <div class="roles">
-            <article class="role" style="--st: var(--st-verified)">
-              <p class="role__role">Elsődleges jogosult</p>
-              <h3>Kötelezettség teljesítése, végig látható portfólióval</h3>
-              <ul>
-                <li>Saját folyamatrend, dokumentumtípusok és sablonok</li>
-                <li>Ellenőrzési kör beküldés előtt</li>
-                <li>Hitelesítés és beadási kötegek kezelése</li>
-                <li>Teljesített megtakarítás projektszinten</li>
-              </ul>
-            </article>
-
-            <article class="role" style="--st: var(--st-approved)">
-              <p class="role__role">Kivitelező · cégcsoport és csapatok</p>
-              <h3>Kevesebb adminisztráció, kevesebb visszakör</h3>
-              <ul>
-                <li>Projektnyitás és terepi rögzítés telefonon is</li>
-                <li>Kötelező dokumentumok listája előre látszik</li>
-                <li>Szerződés generálás és e-aláírás</li>
-                <li>Csapatok, tagok, saját projektportfólió</li>
-              </ul>
-            </article>
-
-            <article class="role" style="--st: var(--st-sent)">
-              <p class="role__role">Auditor</p>
-              <h3>Auditálható dokumentáció, rendezett munkalista</h3>
-              <ul>
-                <li>Egy helyen a projekt teljes dokumentációja</li>
-                <li>Tételes hiánypótlás kiírása a projekten</li>
-                <li>Jóváhagyás és hitelesítés naplózva</li>
-                <li>Kötegelt kezelés a beadáshoz</li>
-              </ul>
-            </article>
-
-            <article class="role" style="--st: var(--st-issue)">
-              <p class="role__role">Értékesítés<span class="tag tag--soon" style="margin-left:.5rem">Fejlesztés alatt</span></p>
-              <h3>Érdeklődéstől a megnyitott projektig</h3>
-              <ul>
-                <li>Érdeklődések nyilvántartása</li>
-                <li>Ajánlatkészítés HEM-értékkel</li>
-                <li>Elfogadott ajánlatból projekt</li>
-                <li>HEM-piac a jogosult és a kivitelező között</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ DOCS TEASER ============ -->
-      <section class="section" id="dokumentacio">
-        <div class="wrap">
-          <div class="section-head">
-            <p class="eyebrow">Dokumentáció és segédletek</p>
-            <h2 class="h2">Leírások, videók, jogi tájékoztatók</h2>
-            <p class="lead">
-              A használati útmutatókat, videós segédleteket és a jogi
-              dokumentumokat külön oldalon gyűjtjük, hogy a bevezetés ne
-              e-mailes kérdezgetésből álljon.
-            </p>
-          </div>
-
-          <div class="docs-grid">
-            <a class="doc-card" href="/docs#kezikonyvek">
-              <h3>Használati útmutatók</h3>
-              <p>
-                Szerepkörönként: kivitelező, auditor, jogosult — mit hol
-                talál, mit mikor kell rögzíteni.
-              </p>
-            </a>
-            <a class="doc-card" href="/docs#videok">
-              <h3>Videós segédletek</h3>
-              <p>
-                Rövid képernyőfelvételek a gyakori műveletekről:
-                projektnyitás, felmérés, beküldés, hitelesítés.
-              </p>
-            </a>
-            <a class="doc-card" href="/docs#hem-szamitas">
-              <h3>A HEM-számításról</h3>
-              <p>
-                Mit számol a rendszer, milyen bemenetekből, és mire alapozza a
-                rendelet szerint.
-              </p>
-            </a>
-            <a class="doc-card" href="/docs#adatkezeles">
-              <h3>Adatkezelés és cookie-k</h3>
-              <p>
-                Adatkezelési tájékoztató, cookie-tájékoztató és a
-                szerződéses feltételek.
-              </p>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ CTA ============ -->
-      <section class="section" id="demo">
-        <div class="wrap">
-          <div class="cta on-dark">
-            <div>
-              <p class="eyebrow">Demó és bevezetés</p>
-              <h2>Nézze meg éles projekten, mit rövidít le.</h2>
-              <p>
-                A bemutató hozzáférés regisztráció nélkül, egy kattintással
-                nyílik — kivitelezői szerepkörben, valódi mintaprojektekkel.
-                Szívesen végig is vezetjük rajta egy online egyeztetésen, a
-                saját folyamatrendjük példáján.
-              </p>
-            </div>
-            <div class="cta__actions">
-              <a class="btn btn--primary" href="https://demo.hemapp.hu" rel="noopener">
-                Demó megnyitása
-              </a>
-              <a
-                class="btn btn--ghost"
-                href="mailto:info@global-klima.hu?subject=HEMapp%20bemutat%C3%B3%20k%C3%A9r%C3%A9s"
-              >
-                Bemutatót kérek
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ CONTACT ============ -->
-      <section class="section section--ink" id="kapcsolat">
-        <div class="wrap">
-          <div class="section-head">
-            <p class="eyebrow">Kapcsolat</p>
-            <h2 class="h2">Beszéljünk a folyamatrendjükről</h2>
-            <p class="lead">
-              A HEMapp fejlesztője és üzemeltetője a Global Airconditional
-              Kft. — klíma- és hőszivattyú-szakmai háttérrel, saját
-              kivitelezői tapasztalatból.
-            </p>
-          </div>
-
-          <div class="contact">
-            <dl>
-              <div>
-                <dt>Cégnév</dt>
-                <dd>Global Airconditional Kft.</dd>
-              </div>
-              <div>
-                <dt>Székhely</dt>
-                <dd>2220 Vecsés, Tengely utca 5.</dd>
-              </div>
-              <div>
-                <dt>Adószám</dt>
-                <dd>25130843-2-13</dd>
-              </div>
-              <div>
-                <dt>Cégjegyzékszám</dt>
-                <dd>13-09-189092</dd>
-              </div>
-            </dl>
-
-            <dl>
-              <div>
-                <dt>E-mail</dt>
-                <dd><a href="mailto:info@global-klima.hu">info@global-klima.hu</a></dd>
-              </div>
-              <div>
-                <dt>Telefon</dt>
-                <dd><a href="tel:+36306778084">+36 30 677 8084</a></dd>
-              </div>
-              <div>
-                <dt>Weboldal</dt>
-                <dd>
-                  <a href="https://www.global-klima.hu" rel="noopener">
-                    global-klima.hu
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt>Kapcsolatfelvétel</dt>
-                <dd>
-                  <a
-                    href="mailto:info@global-klima.hu?subject=HEMapp%20%C3%A9rdekl%C5%91d%C3%A9s"
-                  >
-                    Írjon nekünk a HEMapp-ról
-                  </a>
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="wrap footer__inner">
-        <p>© 2026 Global Airconditional Kft. · HEMapp</p>
-        <nav aria-label="Lábléc navigáció">
-          <a href="/docs">Dokumentáció</a>
-          <a href="/docs#adatkezeles">Adatkezelési tájékoztató</a>
-          <a href="/docs#cookie">Cookie-tájékoztató</a>
-          <a href="#kapcsolat">Kapcsolat</a>
-          <button type="button" data-cookie-reopen>Cookie-beállítások</button>
-        </nav>
-      </div>
-    </footer>
-
-    <!-- GDPR consent: nothing beyond the consent record itself is stored
-         before an explicit choice, and analytics only loads on "accept". -->
-    <div
-      class="cookie"
-      id="cookie-banner"
-      role="dialog"
-      aria-modal="false"
-      aria-labelledby="cookie-title"
-      aria-describedby="cookie-desc"
-    >
-      <div class="cookie__box">
-        <div>
-          <h2 id="cookie-title">Cookie-k és mérés</h2>
-          <p id="cookie-desc">
-            Az oldal működéséhez csak a hozzájárulás tényét tároljuk a
-            böngészőjében. Statisztikai mérést kizárólag az Ön
-            hozzájárulásával indítunk, és azt bármikor visszavonhatja a lábléc
-            „Cookie-beállítások" pontjában.
-            <a href="/docs#cookie">Cookie-tájékoztató</a>
-          </p>
-        </div>
-        <div class="cookie__actions">
-          <button class="btn btn--primary" type="button" data-consent="granted">
-            Elfogadom
-          </button>
-          <button class="btn btn--ghost" type="button" data-consent="denied">
-            Csak a szükségesek
-          </button>
-        </div>
+    <div class="proof-strip">
+      <div class="container proof-grid">
+        <strong>A HEM megvalósítás teljes útja egy helyen</strong>
+        <div class="proof-items"><span>Leadgenerálás</span><span>Kalkuláció</span><span>Ajánlat</span><span>Megállapodás</span><span>Kivitelezés</span><span>Dokumentáció</span><span>Audit</span><span>MEKH-bejegyzés</span></div>
       </div>
     </div>
 
-    <script src="/site.js" defer></script>
-  </body>
+    <section class="section section-soft" id="ekr-hem">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Az üzleti háttér röviden</span>
+          <h2>Mi az EKR, és mitől érték a HEM?</h2>
+          <p>Rövid, közérthető összefoglaló arról, mi teremti meg a hitelesített energiamegtakarítás üzleti és társadalmi értékét.</p>
+        </div>
+
+        <div class="definition-grid">
+          <div class="definition-copy" data-reveal>
+            <p>Az <strong>EKR, vagyis az Energiahatékonysági Kötelezettségi Rendszer</strong> az energiakereskedők és más kötelezett felek éves energiamegtakarítási kötelezettségének rendszere. A <strong>HEM, vagyis a Hitelesített Energiamegtakarítás</strong> energetikai auditáló szervezet által hitelesített, nyilvántartható és átruházható megtakarítási érték. Mivel a kötelezett fél saját intézkedések mellett HEM megszerzésével – a gyakorlatban többek között vásárlással – is teljesítheti kötelezettségét, a megfelelően előkészített, dokumentált és auditálható energiahatékonysági beruházás valódi piaci értéket teremthet.</p>
+          </div>
+
+          <aside class="residential-card" data-reveal>
+            <span class="badge">Lakossági beruházások kiemelt szerepben</span>
+            <h3>2025-től a lakóépületi projektek különösen fontos teljesítési forrást jelentenek.</h3>
+            <p>Az aktuális szabályozás a teljes energiamegtakarítási kötelezettség közel felét lakossági energiahatékonysági beruházások felé tereli, jelentősen növelve a dokumentált lakossági projektek és az azokból származó HEM-ek szerepét. Mindez tartós keresletet teremt a jól dokumentált, auditálható lakossági HEM projektek iránt.</p>
+            <div class="source-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 10v6M12 7h.01"/></svg>
+              <span>Tájékoztató összefoglaló, 2026. júliusi jogállapot. Hivatalos háttér: <a href="https://enhat.mekh.hu/ekr" target="_blank" rel="noopener">MEKH EKR</a>, <a href="https://njt.hu/jogszabaly/2015-57-00-00" target="_blank" rel="noopener">Ehat. törvény</a> és <a href="https://njt.hu/jogszabaly/2015-122-20-22" target="_blank" rel="noopener">végrehajtási rendelet</a>.</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft merchant">
+      <div class="container">
+        <div class="merchant-panel" data-reveal>
+          <div class="merchant-copy">
+            <span class="eyebrow">Építőanyag-kereskedőknek</span>
+            <h2>A kereskedelmi értékesítés mellé előzetesen kalkulálható, HEM hozzájárulás kapcsolható.</h2>
+            <p>Ha az ingatlan és a tervezett korszerűsítés megfelel az EKR feltételeinek, a kalkulátor előzetesen számszerűsítheti a várható energiamegtakarítást és az ahhoz kapcsolható HEM értékét. A kereskedő így nem csupán terméket értékesít: a vásárlónak pénzügyi előnyt, kivitelezői ajánlatot és egy végigvezetett, auditálható dokumentációs folyamatot is kínálhat – külön pályázati eljárás nélkül.</p>
+            <div class="merchant-points">
+            </div>
+            <div class="merchant-note">Az előzetes kalkuláció tájékoztató jellegű; a végleges HEM-értéket a megvalósult beruházás dokumentációja, auditja és hivatalos nyilvántartási folyamata alapozza meg.</div>
+          </div>
+          <div class="merchant-visual">
+            <div class="merchant-flow">
+              <div class="merchant-step"><b>1</b><div><strong>Weboldalba integrálható HEM kalkulátor</strong><small>Saját arculatú, kampányba, termékoldalba vagy szakáruházi felületbe integrált kalkulátorral a lakosság közvetlenül a kereskedő oldalán számíthatja ki a tervezett beruházás előzetes energiamegtakarítását és HEM-potenciálját.</small></div><em>WHITE-LABEL</em></div>
+              <div class="merchant-step"><b>2</b><div><strong>Jóváhagyott saját terméklista</strong><small>Meghatározható, hogy a kalkulátorban és a kivitelezői projektekben mely gyártók, termékek, anyagok és berendezések legyenek elérhetők, így a partnerek kizárólag az előzetesen engedélyezett kínálathoz használhatják fel a támogatást.</small></div><em>SAJÁT KÍNÁLAT</em></div>
+              <div class="merchant-step"><b>3</b><div><strong>Egy kattintással projekt nyitás az ajánlatokból</strong><small>A nyertes ajánlat adatai újrarögzítés nélkül kerülnek a kivitelezési folyamatba</small></div><em>PROJEKT</em></div>
+              <div class="merchant-step"><b>4</b><div><strong>Egy kattintással projekt nyitás az ajánlatokból</strong><small>A rendszer számszerűsített, strukturált leadeket hoz létre az ingatlan, a tervezett beruházás, a kiválasztott termékek és az előzetes kalkuláció adataival. A leadekhez kizárólag a kijelölt kivitelezők férhetnek hozzá és adhatnak ajánlatot, így az érdeklődés és a teljes értékesítési lehetőség a saját partneri ökoszisztémán belül marad.</small></div><em>ZÁRT KÖR</em></div>
+              <div class="merchant-result"><small>Üzleti eredmény</small><strong>Anyagértékesítés + HEM-hozzájárulás + kivitelezés + auditálható dokumentáció egy összekapcsolt folyamatban</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="leadmotor">
+      <div class="container lead-grid">
+        <div class="lead-copy" data-reveal>
+          <span class="eyebrow">Kiemelt funkció</span>
+          <h2>White-label leadgenerálás saját termékkörrel és saját kivitelezőkkel.</h2>
+          <p>Az első számú jogosult, a szervező vagy a kereskedelmi partner saját arculattal publikálhat lakossági kalkulátort. A megjelenő anyagokat és berendezéseket az első számú jogosult folyamatrendenként szabályozhatja, a létrejövő leadhez pedig kizárólag a kijelölt partneri kivitelezők férhetnek hozzá.</p>
+          <ul class="check-list">
+            <li>A kalkulátor kampányhoz, szakáruházhoz vagy közvetlenül a partner weboldalához integrálható.</li>
+            <li>Csak a jóváhagyott saját termékek jelennek meg, előre rögzített műszaki adatokkal és termékdokumentumokkal.</li>
+            <li>A lead az ingatlanadatokat, a kiválasztott terméket és az előzetes kalkuláció konkrét értékeit együtt tartalmazza.</li>
+            <li>Ajánlatot kizárólag az első számú jogosult által kijelölt saját kivitelezői partnerkör adhat.</li>
+            <li>A végső felhasználó kiválasztása után a nyertes kivitelező egyetlen kattintással projektet indíthat.</li>
+            <li>A lead, a kalkuláció, a termékadatok és az ajánlat újrarögzítés nélkül kerülnek a kivitelezési dokumentációba.</li>
+          </ul>
+        </div>
+
+        <div class="lead-demo" data-reveal aria-label="Saját weboldalba integrálható kalkulátor és zárt kivitelezői leadlista illusztráció">
+          <div class="lead-demo-grid">
+            <div class="calc-card">
+              <div class="mock-head"><strong>Lakossági kalkulátor</strong><span>Saját arculat</span></div>
+              <div class="field"><label>Beruházás típusa</label><span>Födémszigetelés</span></div>
+              <div class="field"><label>Engedélyezett termék</label><span>Jóváhagyott saját terméklista</span></div>
+              <div class="field"><label>Ingatlan típusa</label><span>Családi ház</span></div>
+              <div class="field"><label>Érintett felület</label><span>120 m²</span></div>
+              <div class="mock-button">Előzetes kalkuláció és ajánlatkérés</div>
+              <div class="calc-result"><small>Példaeredmény</small><strong>Energiamegtakarítási és HEM-potenciál konkrét adatokkal</strong></div>
+            </div>
+            <div class="lead-queue">
+              <div class="mock-head"><strong>Saját leadlista</strong><span>Csak partnerkör</span></div>
+              <div class="lead-row"><span class="lead-avatar">L1</span><div><strong>Födémszigetelés · Családi ház</strong><small>Termék- és kalkulációs adatlap rendelkezésre áll</small></div><em>ÚJ</em></div>
+              <div class="lead-row"><span class="lead-avatar">L2</span><div><strong>Klímatelepítés · Lakóingatlan</strong><small>Ajánlattétel megnyitva a saját partnereknek</small></div><em>AJÁNLAT</em></div>
+              <div class="lead-row"><span class="lead-avatar">L3</span><div><strong>Homlokzati szigetelés</strong><small>A végső felhasználó nyertest választott</small></div><em>NYERTES</em></div>
+              <div class="lead-row"><span class="lead-avatar">L4</span><div><strong>Hőszivattyú-telepítés</strong><small>Előtöltött projektadatlap és dokumentáció</small></div><em>PROJEKT</em></div>
+              <div class="exclusive"><b>🔒</b><span>A terméklista, a leadhozzáférés és az ajánlattétel az első számú jogosult által, folyamatrendenként szabályozható.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="platform">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Szerepkör-alapú együttműködés</span>
+          <h2>Minden szereplő ugyanazt a projektet látja – a saját feladatához igazítva.</h2>
+          <p>Az adat nem e-mailek, táblázatok és mappák között vándorol. Az auditor, az első számú jogosult vagy szervező és a kivitelező ugyanazon projektben dolgozik, miközben mindenki csak a saját feladatához szükséges nézetet és műveleteket kapja.</p>
+        </div>
+
+        <div class="platform-layout" data-reveal>
+          <div class="role-tabs" role="tablist" aria-label="HEMApp szerepkörök">
+            <button class="role-tab active" type="button" role="tab" aria-selected="true" data-role="auditor"><span class="role-icon">✓</span><span><strong>Auditor</strong><small>Ellenőrzés, hiánypótlás, GJ, jóváhagyás</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+            <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="jogosult"><span class="role-icon">◎</span><span><strong>Első számú jogosult / szervező</strong><small>Portfólió, partnerek, folyamatrend, kötegek</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+            <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="kivitelezo"><span class="role-icon">⌁</span><span><strong>Kivitelező</strong><small>Ajánlat, adatfelvétel, fényképek, dokumentáció</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+          </div>
+
+          <div class="platform-screen">
+            <div class="screen-top"><div class="crumb"><div class="screen-dots"><i></i><i></i><i></i></div><span>HEMApp munkafelület</span></div><span class="screen-tag">Élő projektfolyamat</span></div>
+            <div class="screen-content">
+              <div class="role-panel active" data-panel="auditor">
+                <div class="screen-heading"><div><h3>Auditálási és több-jogosulti munkatér</h3><p>Több első számú jogosult elkülönített folyamatai egy auditori felületen.</p></div><span class="screen-tag">Auditori nézet</span></div>
+                <div class="mock-kpis"><div class="mock-kpi"><span>Ügyfélkör</span><strong>Több jogosult egy rendszerben</strong></div><div class="mock-kpi"><span>Dokumentáció</span><strong>Elkülönített folyamatrendek</strong></div><div class="mock-kpi"><span>Energia</span><strong>GJ és jóváhagyás</strong></div></div>
+                <div class="mock-table"><div class="mock-table-row header"><span>Projekt</span><span>Jogosult</span><span>Dokumentum</span><span>Státusz</span></div><div class="mock-table-row"><strong>#AUD-2607-01</strong><span>Jogosult A</span><span>Teljes</span><span class="mini-status cyan">Beküldött</span></div><div class="mock-table-row"><strong>#AUD-2607-02</strong><span>Jogosult B</span><span>1 hiány</span><span class="mini-status orange">Hiánypótlás</span></div><div class="mock-table-row"><strong>#AUD-2606-18</strong><span>Jogosult A</span><span>Teljes</span><span class="mini-status green">Jóváhagyott</span></div><div class="mock-table-row"><strong>#AUD-2606-21</strong><span>Jogosult C</span><span>Teljes</span><span class="mini-status green">Kötegezhető</span></div></div>
+                <div class="panel-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg><span>Az auditor minden szerződését és jogosulti kapcsolatát behozhatja, miközben a dokumentumok, sablonok és projektek folyamatrendenként elkülönülnek.</span></div>
+              </div>
+
+              <div class="role-panel" data-panel="jogosult">
+                <div class="screen-heading"><div><h3>Portfólió-, szervező- és partnerkezelés</h3><p>Átlátható projektállomány az első számú jogosult és a kijelölt szervezők számára.</p></div><span class="screen-tag">Jogosulti nézet</span></div>
+                <div class="mock-kpis"><div class="mock-kpi"><span>Projektút</span><strong>Lead → Audit → MEKH</strong></div><div class="mock-kpi"><span>Partnerkör</span><strong>Saját kivitelezők és szervezők</strong></div><div class="mock-kpi"><span>Szabályozás</span><strong>Egyedi folyamatrendek</strong></div></div>
+                <div class="mock-table"><div class="mock-table-row header"><span>Projekt</span><span>Kivitelező</span><span>HEM állapot</span><span>Művelet</span></div><div class="mock-table-row"><strong>#HEM-2607-A</strong><span>Partner A</span><span class="mini-status orange">Ellenőrzés</span><span>Megnyitás</span></div><div class="mock-table-row"><strong>#HEM-2607-B</strong><span>Partner B</span><span class="mini-status cyan">Audit alatt</span><span>Megnyitás</span></div><div class="mock-table-row"><strong>#HEM-2606-C</strong><span>Partner A</span><span class="mini-status green">Kötegezhető</span><span>Hozzárendelés</span></div><div class="mock-table-row"><strong>#HEM-2606-D</strong><span>Partner C</span><span class="mini-status green">Jóváhagyva</span><span>Részletek</span></div></div>
+                <div class="panel-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg><span>Projektportfólió, szerződések, számlaállapot, HEM-értékek, kivitelezői partnerkör és kötegállapot egy nézetben.</span></div>
+              </div>
+
+              <div class="role-panel" data-panel="kivitelezo">
+                <div class="screen-heading"><div><h3>Vezetett kivitelezői projektadatlap</h3><p>Csak a szükséges adatok, engedélyezett anyagok, egyértelmű dokumentumlista és automatikus kontroll.</p></div><span class="screen-tag">Kivitelezői nézet</span></div>
+                <div class="mock-kpis"><div class="mock-kpi"><span>Adatlap</span><strong>Leadből előtöltve</strong></div><div class="mock-kpi"><span>Kivitelezés</span><strong>Fényképes bizonyítékok</strong></div><div class="mock-kpi"><span>Szerződés</span><strong>Automatikus PDF-ek</strong></div></div>
+                <div class="mock-table"><div class="mock-table-row header"><span>Feladat</span><span>Feltöltés</span><span>Ellenőrzés</span><span>Állapot</span></div><div class="mock-table-row"><strong>Projektadatok</strong><span>Előtöltve</span><span>Rendben</span><span class="mini-status green">Kész</span></div><div class="mock-table-row"><strong>Kivitelezési képek</strong><span>Folyamatban</span><span>1 hiány</span><span class="mini-status orange">Teendő</span></div><div class="mock-table-row"><strong>Szerződéscsomag</strong><span>Generálható</span><span>Adatok kész</span><span class="mini-status cyan">PDF</span></div><div class="mock-table-row"><strong>Beküldés</strong><span>Várakozik</span><span>Automatikus</span><span class="mini-status cyan">Kontroll</span></div></div>
+                <div class="panel-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4zM8 9h8M8 13h5"/></svg><span>A lead, a kalkuláció és a kiválasztott termék adatai újrarögzítés nélkül kerülhetnek a projekt dokumentációjába.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="folyamat">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Végponttól végpontig</span>
+          <h2>Egy összefüggő projektfolyamat, megszakítások nélkül.</h2>
+          <p>A lakossági érdeklődés, az ajánlat, az előzetes elemzés és a megállapodás, a kivitelezés, a teljes dokumentáció, az audit és a MEKH-bejegyzés ugyanannak a projektnek az egymásra épülő lépései.</p>
+        </div>
+        <div class="process-track" data-reveal>
+          <div class="process-step"><span class="process-icon">↗</span><strong>Lead</strong><span>Kampány vagy weboldalba integrált kalkulátor</span></div>
+          <div class="process-step"><span class="process-icon">∑</span><strong>Kalkuláció</strong><span>Előzetes energiamegtakarítási és HEM-potenciál</span></div>
+          <div class="process-step"><span class="process-icon">◎</span><strong>Ajánlat</strong><span>Kizárólag a kijelölt saját kivitelezői körben</span></div>
+          <div class="process-step"><span class="process-icon">✎</span><strong>Előzetes elemzés és megállapodás</strong><span>Szerződés és jogosulti feltételek rögzítése</span></div>
+          <div class="process-step"><span class="process-icon">⌁</span><strong>Kivitelezés</strong><span>Engedélyezett anyagok, műszaki adatok és fényképek</span></div>
+          <div class="process-step"><span class="process-icon">▤</span><strong>Teljes dokumentáció</strong><span>Szerződések, nyilatkozatok, számla és bizonyítékok</span></div>
+          <div class="process-step"><span class="process-icon">✓</span><strong>Audit</strong><span>Ellenőrzés, hiánypótlás, GJ és jóváhagyás</span></div>
+          <div class="process-step"><span class="process-icon">▱</span><strong>MEKH-bejegyzés</strong><span>HEM-köteg, azonosítás és hivatalos EKR-nyilvántartás</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="funkciok">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Teljes funkciókatalógus</span>
+          <h2>A napi operáció teljes eszköztára, szerepkörönként.</h2>
+          <p>A HEMApp nem egyszerű dokumentumtár: leadgenerálási, portfóliókezelési, folyamatirányítási, kivitelezési, dokumentációs és auditori munkarendszer. Az alábbi funkciók a résztvevők konkrét feladatai szerint mutatják be a platform teljes képességét.</p>
+          <nav class="feature-index" aria-label="Funkciók szerepkör szerint">
+            <a href="#funkcio-auditor">Auditor</a><a href="#funkcio-jogosult">Első számú jogosult</a><a href="#funkcio-szervezo">Szervező</a><a href="#funkcio-kivitelezo">Kivitelező</a><a href="#funkcio-kozos">Közös funkciók</a>
+          </nav>
+        </div>
+        <div class="feature-groups">
+        <div class="feature-group role-auditor" id="funkcio-auditor">
+          <div class="feature-group-head" data-reveal>
+            <span class="feature-role-badge">✓</span>
+            <div><h3>Auditori funkciók</h3><p>Több első számú jogosult, nagy projektmennyiség és elkülönített dokumentáció kezelése egyetlen ellenőrzési felületen.</p><span class="feature-count">10 funkcióterület</span></div>
+          </div>
+          <div class="feature-grid">
+          <article class="feature-card" data-reveal><span class="feature-icon">◉</span><span class="feature-owner">Auditor</span><h3>Több jogosulti portfólió</h3><p>Több első számú jogosult szerződései és projektjei egy belépéssel, ügyfelenként elkülönítve kezelhetők.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">⌘</span><span class="feature-owner">Auditor</span><h3>Elkülönített folyamatrendek</h3><p>Minden jogosulti vagy szerződéses kapcsolat saját dokumentum-, anyag- és ellenőrzési szabályokat kaphat.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">◎</span><span class="feature-owner">Auditor</span><h3>Auditori munkatársak és jogosultságok</h3><p>Auditori kollégák meghívhatók, a hozzáférés pedig feladatkörhöz és ügyfélkörhöz igazítható.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">▦</span><span class="feature-owner">Auditor</span><h3>Beküldött projektek munkalistája</h3><p>Kereshető és rendezhető lista projekt, végső felhasználó, jogosult, kivitelező, csapat és státusz szerint.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">◫</span><span class="feature-owner">Auditor</span><h3>Teljes projekt-dosszié</h3><p>Projektadatok, kivitelezés, szerződések, fényképek, anyagok, számlák és mellékletek egy ellenőrzési nézetben.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">↩</span><span class="feature-owner">Auditor</span><h3>Hiánypótlás és visszaküldés</h3><p>A hiányok strukturáltan jelölhetők, a projekt visszaküldhető, majd ismételt ellenőrzésre fogadható.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">∑</span><span class="feature-owner">Auditor</span><h3>GJ-érték ellenőrzése és jóváhagyása</h3><p>A számított és a jóváhagyott energiamegtakarítás elkülönítve, GJ-ban rögzíthető és követhető.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">▧</span><span class="feature-owner">Auditor</span><h3>Számla- és pénzügyi státusz</h3><p>Azonnal látható, hogy a kivitelezői számla és a szükséges pénzügyi dokumentáció rendelkezésre áll-e.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">▱</span><span class="feature-owner">Auditor</span><h3>HEM-kötegek és MEKH-azonosító</h3><p>Jóváhagyott projektek köteghez rendelhetők; követhető az összes GJ, a projektszám, az azonosító és a lezárás.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">🔒</span><span class="feature-owner">Auditor</span><h3>Visszakövethető auditállapot</h3><p>Beküldés után a projekt zárolható, miközben a feltöltő, az időpont és a dokumentumállapot megmarad.</p></article>
+          </div>
+        </div>
+        <div class="feature-group role-jogosult" id="funkcio-jogosult">
+          <div class="feature-group-head" data-reveal>
+            <span class="feature-role-badge">◎</span>
+            <div><h3>Első számú jogosulti funkciók</h3><p>A teljes projektportfólió, a szervezők, a kivitelezők, a dokumentációs szabályok és a HEM-folyamat központi irányítása.</p><span class="feature-count">14 funkcióterület</span></div>
+          </div>
+          <div class="feature-grid">
+          <article class="feature-card" data-reveal><span class="feature-icon">▦</span><span class="feature-owner">Első számú jogosult</span><h3>Projektportfólió és státuszok</h3><p>Tömeges projektállomány kivitelező, csapat, végső felhasználó, GJ-, számla- és HEM-állapot szerint áttekinthető.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">◎</span><span class="feature-owner">Első számú jogosult</span><h3>Szervezők és adminisztrátorok hozzáadása</h3><p>Belső munkatársak és külső szervezők meghívhatók, ellenőrzött szerepkörökkel és hozzáférési szintekkel.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">⌁</span><span class="feature-owner">Első számú jogosult</span><h3>Kivitelező cégek és csapatok</h3><p>Kivitelező vállalkozások, csapatok és felelősök kezelhetők, majd projektekhez és folyamatrendekhez rendelhetők.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">✉</span><span class="feature-owner">Első számú jogosult</span><h3>Partnerkérelmek és szerződések</h3><p>Az új partnerkérelmek, cégadatok, kapcsolattartók és szerződéses státuszok központilag feldolgozhatók.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">⌘</span><span class="feature-owner">Első számú jogosult</span><h3>Testreszabható folyamatrend</h3><p>Projekttípusonként megadható az aktív folyamat, a használó cégek köre, az aláírás és az ellenőrzési logika.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">✓</span><span class="feature-owner">Első számú jogosult</span><h3>Kötelező mezők és dokumentumok</h3><p>Projekt-, jogosulti és beruházásspecifikus adatmezők, fényképek, igazolványok és számlák tehetők kötelezővé.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">−</span><span class="feature-owner">Első számú jogosult</span><h3>Nem szükséges mezők elrejtése</h3><p>Az adott projekthez felesleges mezők kikapcsolhatók, így a kivitelező csak a valóban szükséges adatokat látja.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">✎</span><span class="feature-owner">Első számú jogosult</span><h3>Dokumentumsablon-szerkesztő</h3><p>Szerződések, megállapodások, nyilatkozatok és jegyzőkönyvek dinamikus projektmezőkkel szerkeszthetők.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">▤</span><span class="feature-owner">Első számú jogosult</span><h3>Automatikus PDF és aláírásminta</h3><p>A projekt adataiból PDF-csomag készülhet; a szervezeti aláírásminta rajzolható, feltölthető és beilleszthető.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">∑</span><span class="feature-owner">Első számú jogosult</span><h3>Energiamegtakarítási kalkulátorok</h3><p>Klíma, hőszivattyú, homlokzat, födém és nyílászáró beruházások előzetes kWh- és GJ-számítása.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">▧</span><span class="feature-owner">Első számú jogosult</span><h3>Központi és saját anyaglista</h3><p>Gyártók, cikkszámok, műszaki paraméterek, energiacímkék, adatlapok és teljesítménynyilatkozatok egységes adatbázisa.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">🔐</span><span class="feature-owner">Első számú jogosult</span><h3>Szabályozott termékkör</h3><p>Folyamatrendenként, partnerenként vagy kampányonként meghatározható, mely termékek választhatók a leadben és a projektben.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">↗</span><span class="feature-owner">Első számú jogosult</span><h3>White-label kalkulátor és leadmotor</h3><p>A saját weboldalba integrált kalkulátor a jogosult arculatával és jóváhagyott termékkörével generál lakossági leadeket.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">⚑</span><span class="feature-owner">Első számú jogosult</span><h3>Zárt ajánlattétel és projektindítás</h3><p>A leadre csak a kijelölt kivitelezők adhatnak ajánlatot; a nyertes ajánlatból egy kattintással projekt indítható.</p></article>
+          </div>
+        </div>
+        <div class="feature-group role-szervezo" id="funkcio-szervezo">
+          <div class="feature-group-head" data-reveal>
+            <span class="feature-role-badge">↔</span>
+            <div><h3>Szervezői funkciók</h3><p>Több első számú jogosult kiszolgálása úgy, hogy minden szerződés, folyamatrend és dokumentumkör elkülönül, mégis egy felületen marad.</p><span class="feature-count">9 funkcióterület</span></div>
+          </div>
+          <div class="feature-grid">
+          <article class="feature-card" data-reveal><span class="feature-icon">◉</span><span class="feature-owner">Szervező</span><h3>Több jogosult egy belépéssel</h3><p>A szervező több első számú jogosult részére állíthat elő és koordinálhat dokumentációt ugyanazon munkafelületen.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">▣</span><span class="feature-owner">Szervező</span><h3>Jogosultonként elkülönített adatkör</h3><p>A projektek, sablonok, anyaglisták és szerződéses szabályok jogosulti folyamatrendenként szétválaszthatók.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">⌘</span><span class="feature-owner">Szervező</span><h3>Kivitelezők folyamatrendhez rendelése</h3><p>Minden kivitelező a megfelelő jogosulti folyamathoz kapcsolható, így automatikusan a helyes mezőket és dokumentumokat kapja.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">↗</span><span class="feature-owner">Szervező</span><h3>Kampányok és integrált kalkulátorok</h3><p>Jogosultonként vagy partnerprogramonként külön arculatú kalkuláció és leadgyűjtés indítható.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">🔒</span><span class="feature-owner">Szervező</span><h3>Leadek zárt kiosztása</h3><p>A létrejövő érdeklődések csak az adott programhoz rendelt, engedélyezett kivitelezői partnerkör számára jelennek meg.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">◎</span><span class="feature-owner">Szervező</span><h3>Ajánlati folyamat koordinálása</h3><p>Az ajánlattétel megnyitható, követhető és lezárható; a végső felhasználó választása alapján nyertes jelölhető ki.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">→</span><span class="feature-owner">Szervező</span><h3>Nyertes ajánlatból előtöltött projekt</h3><p>A kalkuláció, a termék, a cím és az ajánlat adatai újrarögzítés nélkül vihetők tovább a kivitelezési dokumentációba.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">✓</span><span class="feature-owner">Szervező</span><h3>Státusz- és hiánypótlási koordináció</h3><p>A szervező egy helyen követheti a várakozó, beküldött, ellenőrzés alatt álló és hiánypótlásos projekteket.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">◎</span><span class="feature-owner">Szervező</span><h3>Szervezői csapat és kapcsolatok</h3><p>Saját munkatársak, kivitelezői kapcsolattartók és partneradatok egységesen kezelhetők.</p></article>
+          </div>
+        </div>
+        <div class="feature-group role-kivitelezo" id="funkcio-kivitelezo">
+          <div class="feature-group-head" data-reveal>
+            <span class="feature-role-badge">⌁</span>
+            <div><h3>Kivitelezői funkciók</h3><p>Vezetett, egyszerű adatfelvétel a leadtől a beküldésig, előre beállított termékekkel és dokumentációs követelményekkel.</p><span class="feature-count">15 funkcióterület</span></div>
+          </div>
+          <div class="feature-grid">
+          <article class="feature-card" data-reveal><span class="feature-icon">↗</span><span class="feature-owner">Kivitelező</span><h3>Saját leadlista és ajánlattétel</h3><p>A kivitelező csak a számára megnyitott lakossági leadeket látja, és közvetlenül adhat rájuk ajánlatot.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">→</span><span class="feature-owner">Kivitelező</span><h3>Nyertes ajánlat továbbvitele</h3><p>A kiválasztott ajánlatból a teljes kalkulációs és ügyféladat-készlet egy kattintással projektbe emelhető.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">＋</span><span class="feature-owner">Kivitelező</span><h3>Új projekt és projektkártyák</h3><p>Új energiahatékonysági projekt indítható; a kártyákon az azonosító, ügyfél, cím, kép és státusz azonnal látható.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">⌕</span><span class="feature-owner">Kivitelező</span><h3>Keresés, szűrés és státuszkövetés</h3><p>A projektek szabad szöveggel, kivitelezővel vagy állapottal szűrhetők, a találatok száma és a következő teendő látható.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">⌂</span><span class="feature-owner">Kivitelező</span><h3>Kivitelezési helyszín adatlapja</h3><p>Cím, helyrajzi szám, építési év, alapterület, ingatlantípus, fűtés és tulajdonosi adatok strukturáltan rögzíthetők.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">👤</span><span class="feature-owner">Kivitelező</span><h3>Végső felhasználói adatok</h3><p>Személyes, kapcsolattartási és lakcímadatok kezelhetők, a kivitelezési címmel való egyezés egyszerűen jelölhető.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">▧</span><span class="feature-owner">Kivitelező</span><h3>Személyes és projektdokumentumok</h3><p>Igazolványok, lakcímkártya, adóigazolvány, utcafront, hőtermelő és tájékoztató tábla fényképei tölthetők fel.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">▦</span><span class="feature-owner">Kivitelező</span><h3>Helyiségenkénti kivitelezés</h3><p>A beruházás helyiségek, berendezések vagy kivitelezési egységek szerint bontható, külön műszaki adatokkal.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">◫</span><span class="feature-owner">Kivitelező</span><h3>Fényképek, adattáblák és gyári számok</h3><p>Kültéri és beltéri egységek, adattáblák, hőleadók, gyári számok és kötelező bizonyítékok strukturáltan kezelhetők.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">∑</span><span class="feature-owner">Kivitelező</span><h3>Beépített kalkulátorok</h3><p>A kivitelező klíma-, hőszivattyú-, szigetelési és nyílászáró-projekteknél közvetlenül számolhat előzetes megtakarítást.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">▤</span><span class="feature-owner">Kivitelező</span><h3>Engedélyezett anyagok kiválasztása</h3><p>Csak a jogosult által jóváhagyott termékek választhatók; a műszaki adatok és dokumentumok automatikusan kapcsolódnak.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">◉</span><span class="feature-owner">Kivitelező</span><h3>Projektösszesítő és hozzájárulás</h3><p>A teljes energiamegtakarítás, a lényeges hozzájárulás és a javasolt lakossági összeg egy összesítő nézetben jelenhet meg.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">✎</span><span class="feature-owner">Kivitelező</span><h3>Szerződéses adatok és automatikus PDF</h3><p>Dátumok, vállalási díjak és megjegyzések rögzíthetők, majd a sablonokból szerződések és nyilatkozatok generálhatók.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">✓</span><span class="feature-owner">Kivitelező</span><h3>Beküldés előtti automatikus kontroll</h3><p>A rendszer még beküldés előtt jelzi a hiányzó mezőt, fényképet, dokumentumot vagy aláírást.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">🔒</span><span class="feature-owner">Kivitelező</span><h3>Beküldés, zárolás és hiánypótlás</h3><p>Beküldés után a projekt szerkesztése szabályozottan lezárható; visszaküldés esetén a javítandó feladatok egyértelműek.</p></article>
+          </div>
+        </div>
+        <div class="feature-group role-kozos" id="funkcio-kozos">
+          <div class="feature-group-head" data-reveal>
+            <span class="feature-role-badge">H</span>
+            <div><h3>Közös platformfunkciók</h3><p>A szerepkörök közötti együttműködést és a napi használhatóságot biztosító központi rendszerfunkciók.</p><span class="feature-count">6 funkcióterület</span></div>
+          </div>
+          <div class="feature-grid">
+          <article class="feature-card" data-reveal><span class="feature-icon">⌂</span><span class="feature-owner">Minden szerepkör</span><h3>Szervezeti adatlap és arculat</h3><p>Cégnév, adószám, cím, kapcsolati adatok, logó és szervezeti profil központilag karbantartható.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">✍</span><span class="feature-owner">Minden szerepkör</span><h3>Aláírásminta kezelése</h3><p>Az aláírás közvetlenül megrajzolható vagy képként feltölthető, előnézetben ellenőrizhető és lecserélhető.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">◎</span><span class="feature-owner">Minden szerepkör</span><h3>Kapcsolatok és meghívások</h3><p>Adminisztrátorok, munkatársak, csapatok és kapcsolattartók meghívással kapcsolhatók a szervezethez.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">▤</span><span class="feature-owner">Minden szerepkör</span><h3>Központi segédlet- és dokumentumtár</h3><p>Adatlapok, programismertetők, arculati útmutatók, tulajdoni lapos segédletek és letölthető anyagok egy helyen.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">⌕</span><span class="feature-owner">Minden szerepkör</span><h3>Gyors, egységes kezelőfelület</h3><p>Keresés, szűrés, rendezés, lapozás, találatszám, színkódolt státuszok és gyorsműveletek segítik a tömeges munkát.</p></article>
+          <article class="feature-card" data-reveal><span class="feature-icon">◐</span><span class="feature-owner">Minden szerepkör</span><h3>Profil, nyelv, téma és mobil elérés</h3><p>Felhasználói profil, jelszó- és e-mail-kezelés, világos/sötét mód, valamint hamarosan Android- és iOS-alkalmazás.</p></article>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark">
+      <div class="container benefit-grid">
+        <div class="benefit-copy" data-reveal>
+          <span class="eyebrow">Tömeges projektkezelésre tervezve</span>
+          <h2>Kevesebb manuális egyeztetés. Több kontrollálható projekt.</h2>
+          <p>A HEMApp a projekt teljes adattörténetét egy helyen tartja, ezért a csapat nem külön táblázatokból, levelezésekből és fájlmappákból próbálja összeállítani az auditálható dokumentációt.</p>
+          <div class="benefit-list">
+            <div class="benefit-item"><b>1</b><div><strong>Egységes adatforrás</strong><span>Minden résztvevő ugyanannak a projektnek az aktuális állapotával dolgozik.</span></div></div>
+            <div class="benefit-item"><b>2</b><div><strong>Standardizált minőség</strong><span>A folyamatrend előre meghatározza a szükséges adatokat és bizonyítékokat.</span></div></div>
+            <div class="benefit-item"><b>3</b><div><strong>Visszakövethető felelősség</strong><span>Látható a feltöltő, az időpont, a státusz és a projekt következő feladata.</span></div></div>
+            <div class="benefit-item"><b>4</b><div><strong>Skálázható partnerhálózat</strong><span>Új kivitelezők ugyanabba a vezetett, jogosulti szabályokhoz igazított munkafolyamatba kapcsolhatók be.</span></div></div>
+          </div>
+        </div>
+        <div class="architecture" data-reveal aria-label="HEMApp szereplői és központi platformja">
+          <span class="arch-line line-1"></span><span class="arch-line line-2"></span><span class="arch-line line-3"></span><span class="arch-line line-4"></span>
+          <div class="arch-core"><div><strong>HEMAPP</strong><small>Közös projektadat<br>és folyamat</small></div></div>
+          <div class="arch-node node-1"><strong>Első számú jogosult</strong><small>Portfólió és HEM</small></div>
+          <div class="arch-node node-2"><strong>Auditor</strong><small>Hitelesítés és kontroll</small></div>
+          <div class="arch-node node-3"><strong>Szervező</strong><small>Hálózat és folyamat</small></div>
+          <div class="arch-node node-4"><strong>Kivitelező</strong><small>Adat és dokumentáció</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section support-section" id="support">
+      <div class="container">
+        <div class="support-panel" data-reveal>
+          <div class="support-copy">
+            <span class="eyebrow">Igény szerinti kiegészítő szolgáltatás</span>
+            <h2>A rendszer mellé teljes bevezetési és operatív support is kérhető.</h2>
+            <p>A HEMApp nem hagyja magára a résztvevőket egy összetett dokumentációs folyamatban. Külön supportcsomagban oktatóvideókkal, onboardinggal és folyamatos segítséggel támogatjuk az első számú jogosult, a szervező, az auditor és a kivitelező munkatársait – a rendszer használatától a helyes projektmegvalósítási és dokumentációs lépésekig.</p>
+            <span class="support-label">Igény szerint, külön szolgáltatásként</span>
+          </div>
+          <div class="support-items">
+            <div class="support-item"><b>▶</b><strong>Kivitelezői oktatóvideók</strong><span>Projektindítás, adatfelvétel, anyagválasztás, helyszíni fényképek, dokumentumfeltöltés és beküldés lépésről lépésre.</span></div>
+            <div class="support-item"><b>✓</b><strong>Jogosulti és auditori onboarding</strong><span>Folyamatrendek, sablonok, jogosultságok, ellenőrzési munkalisták és kötegkezelés közös beállítása.</span></div>
+            <div class="support-item"><b>?</b><strong>Operatív helpdesk</strong><span>Gyors segítség a rendszerhasználati, dokumentációs és folyamatmegvalósítási kérdésekhez.</span></div>
+            <div class="support-item"><b>⌘</b><strong>Folyamatbevezetés</strong><span>A meglévő működés feltérképezése és leképezése jogosulti, szervezői, auditori és kivitelezői munkafolyamatokra.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="demo-panel" data-reveal>
+          <div>
+            <span class="eyebrow">Interaktív demórendszer</span>
+            <h2>Próbálja ki a teljes kivitelezői munkafolyamatot.</h2>
+            <p>A nyilvános demó nem statikus bemutató, hanem egy működő HEMApp-rendszer teljes demo-adatbázissal. Végigkattintható a projektadatlap, a kalkuláció, az anyagválasztás, a dokumentáció, a szerződéses folyamat és a beküldés. Az első számú jogosulti, szervezői és auditori felület részletes bemutatása személyes egyeztetéssel kérhető.</p>
+            <div class="mobile-release">
+              <strong>Mobilalkalmazások hamarosan</strong>
+              <div class="store-badges" aria-label="Hamarosan elérhető mobilalkalmazások">
+                <div class="store-badge"><b>▶</b><span><small>Hamarosan</small><strong>Google Play · Android</strong></span></div>
+                <div class="store-badge"><b>iOS</b><span><small>Hamarosan</small><strong>App Store · iOS</strong></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-actions">
+            <a class="btn btn-primary" href="https://hemapp.hu/" target="_blank" rel="noopener">Kivitelezői demórendszer kipróbálása</a>
+            <a class="btn btn-secondary" href="#kapcsolat">Jogosulti / auditori bemutatót kérek</a>
+            <small>A demó új böngészőfülön nyílik meg, és szabadon végigkattintható.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="gyik">
+      <div class="container">
+        <div class="section-head center" data-reveal><span class="eyebrow">Gyakori kérdések</span><h2>A legfontosabb tudnivalók röviden.</h2></div>
+        <div class="faq-list" data-reveal>
+          <article class="faq-item open"><button class="faq-question" type="button" aria-expanded="true"><strong>Mi a különbség az EKR és a HEM között?</strong><span>+</span></button><div class="faq-answer"><div><p>Az EKR az energiahatékonysági kötelezettségi rendszer: meghatározza a kötelezett felek éves energiamegtakarítási kötelezettségét. A HEM az energetikai auditáló szervezet által hitelesített, nyilvántartható és átruházható energiamegtakarítás.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><strong>Miért fontosak a lakossági beruházások az energiakereskedők számára?</strong><span>+</span></button><div class="faq-answer"><div><p>A 2026-tól alkalmazandó szabályozás a kötelezettségalap 0,5%-a feletti részének legalább 75%-át lakóépületek energiahatékonyságát javító egyéni fellépésekből várja el. Emiatt a megfelelően dokumentált lakossági projektállomány stratégiai teljesítési forrás.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><strong>Mit jelent a nem pályázati alapú HEM-hozzájárulás?</strong><span>+</span></button><div class="faq-answer"><div><p>Az arra alkalmas beruházás energiamegtakarítása HEM-értéket teremthet, amelyhez a felek megállapodása alapján pénzügyi hozzájárulás kapcsolódhat. A kalkulátor előzetes értéket mutat; a végleges HEM-et a megvalósítás, a dokumentáció, az audit és a hivatalos nyilvántartási folyamat alapozza meg.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><strong>Hogyan működik a zárt white-label leadgenerálás?</strong><span>+</span></button><div class="faq-answer"><div><p>Az első számú jogosult vagy partnere saját weboldalába integrált, saját arculatú kalkulátort használhat. Csak a jóváhagyott termékek választhatók, a beérkező leadekre pedig kizárólag a kijelölt saját kivitelezői partnerkör adhat ajánlatot.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><strong>Elindítható-e projekt közvetlenül a nyertes ajánlatból?</strong><span>+</span></button><div class="faq-answer"><div><p>Igen. A végső felhasználó választása után a nyertes kivitelező egy kattintással előtöltött projektet indíthat. A lead, a kalkuláció, a termék- és ajánlati adatok újrarögzítés nélkül kerülhetnek a dokumentációba.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><strong>Kezelhet-e egy auditor vagy szervező több első számú jogosultat?</strong><span>+</span></button><div class="faq-answer"><div><p>Igen. Több jogosulti szerződés és portfólió egy felületen kezelhető úgy, hogy a folyamatrendek, sablonok, anyaglisták, kivitelezők és dokumentumok jogosultonként elkülönülnek.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><strong>Kérhető-e oktatás és support a rendszer mellé?</strong><span>+</span></button><div class="faq-answer"><div><p>Igen. Igény szerint külön supportcsomag kérhető oktatóvideókkal, bevezetési támogatással és operatív segítséggel az első számú jogosultak, szervezők, auditorok és kivitelezők számára.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><strong>Elérhető lesz mobilalkalmazás?</strong><span>+</span></button><div class="faq-answer"><div><p>A webes rendszer mellett hamarosan Android- és iOS-alkalmazás is elérhető lesz. A Google Play- és App Store-hivatkozások a publikálás után kerülnek aktiválásra.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><strong>A HEMApp helyettesíti a hivatalos MEKH EKR rendszert?</strong><span>+</span></button><div class="faq-answer"><div><p>Nem. A HEMApp a leadgenerálást, a projekt-előkészítést, a dokumentálást, az auditálást, a jóváhagyási munkafolyamatot és a HEM-köteg előkészítését támogatja. A hatósági nyilvántartási és elszámolási műveletek a hivatalos MEKH EKR rendszer szabályai szerint történnek.</p></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="kapcsolat">
+      <div class="container contact-grid">
+        <div class="contact-copy" data-reveal>
+          <span class="eyebrow">Kapcsolatfelvétel</span>
+          <h2>Kérjen szerepkörre szabott rendszerbemutatót.</h2>
+          <p>A bemutató során nem általános funkciólistát mutatunk, hanem az Ön projektvolumenére, jogosulti kapcsolataira, kivitelezői partnerkörére és működési modelljére épített folyamatot.</p>
+          <div class="contact-types">
+            <div class="contact-type"><b>◎</b><span>Első számú jogosulti és szervezői portfóliókezelés</span></div>
+            <div class="contact-type"><b>✓</b><span>Auditori ellenőrzési és kötegkezelési felület</span></div>
+            <div class="contact-type"><b>↗</b><span>Leadmotor és építőanyag-kereskedői együttműködés</span></div>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm" data-reveal>
+          <div class="form-grid">
+            <div class="form-group"><label for="name">Név</label><input id="name" name="name" autocomplete="name" required></div>
+            <div class="form-group"><label for="company">Cég / szervezet</label><input id="company" name="company" autocomplete="organization" required></div>
+            <div class="form-group"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+            <div class="form-group"><label for="phone">Telefonszám</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="form-group full"><label for="interest">Melyik terület érdekli?</label><select id="interest" name="interest" required><option value="">Válasszon…</option><option>Első számú jogosulti / szervezői rendszer</option><option>Auditori rendszer</option><option>Leadgenerálás és kivitelezői partnerkör</option><option>Építőanyag-kereskedői együttműködés</option><option>Bevezetés, oktatás és support</option><option>Teljes platform</option></select></div>
+            <div class="form-group full"><label for="message">Rövid üzenet</label><textarea id="message" name="message" placeholder="Projektvolumen, szerepkör, partnerhálózat vagy a kívánt bemutató témája…"></textarea></div>
+          </div>
+          <label class="form-check"><input type="checkbox" required><span>Hozzájárulok, hogy a megadott adataim alapján a HEMApp képviselője kapcsolatba lépjen velem. Az űrlap jelen változata e-mail-tervezetet készít.</span></label>
+          <button class="btn btn-primary" type="submit">Bemutatót kérek</button>
+          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7adbf7"/><stop offset="1" stop-color="#55e2c8"/></linearGradient></defs><path d="M24 3.5 42 14v20L24 44.5 6 34V14Z" fill="none" stroke="url(#lf)" stroke-width="2.4"/><path d="M14 16.5 24 10l10 6.5-10 6.4Z" fill="url(#lf)"/><path d="M14 20.4 22 25v10.2l-8-4.6Zm20 0-8 4.6v10.2l8-4.6Z" fill="url(#lf)" opacity=".76"/></svg>
+          <div><strong>HEMAPP</strong><span>HEM projektmenedzsment és együttműködési platform</span></div>
+        </div>
+        <div class="footer-links"><a href="#ekr-hem">EKR és HEM</a><a href="#leadmotor">Leadmotor</a><a href="#platform">Rendszer</a><a href="#support">Support</a><a href="#gyik">GYIK</a><a href="#kapcsolat">Kapcsolat</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> HEMApp. Minden jog fenntartva.</p>
+        <p>A weboldalon szereplő szabályozási információk tájékoztató jellegűek, és nem minősülnek jogi vagy energetikai auditori tanácsadásnak. Jogi háttér: 2026. júliusi állapot.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "HEMApp",
+      "url": "https://hemapp.hu/"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "HEMApp",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Szerepkör-alapú HEM projektmenedzsment, dokumentáció, audit, white-label leadgenerálás és HEM-kötegkezelés első számú jogosultaknak, szervezőknek, auditoroknak és kivitelezőknek.",
+      "url": "https://hemapp.hu/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Mi a különbség az EKR és a HEM között?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Az EKR az energiahatékonysági kötelezettségi rendszer: meghatározza a kötelezett felek éves energiamegtakarítási kötelezettségét. A HEM az energetikai auditáló szervezet által hitelesített, nyilvántartható és átruházható energiamegtakarítás."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Miért fontosak a lakossági beruházások az energiakereskedők számára?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A 2026-tól alkalmazandó szabályozás a kötelezettségalap 0,5%-a feletti részének legalább 75%-át lakóépületek energiahatékonyságát javító egyéni fellépésekből várja el. Emiatt a megfelelően dokumentált lakossági projektállomány stratégiai teljesítési forrás."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Mit jelent a nem pályázati alapú HEM-hozzájárulás?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Az arra alkalmas beruházás energiamegtakarítása HEM-értéket teremthet, amelyhez a felek megállapodása alapján pénzügyi hozzájárulás kapcsolódhat. A kalkulátor előzetes értéket mutat; a végleges HEM-et a megvalósítás, a dokumentáció, az audit és a hivatalos nyilvántartási folyamat alapozza meg."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hogyan működik a zárt white-label leadgenerálás?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Az első számú jogosult vagy partnere saját weboldalába integrált, saját arculatú kalkulátort használhat. Csak a jóváhagyott termékek választhatók, a beérkező leadekre pedig kizárólag a kijelölt saját kivitelezői partnerkör adhat ajánlatot."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Elindítható-e projekt közvetlenül a nyertes ajánlatból?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Igen. A végső felhasználó választása után a nyertes kivitelező egy kattintással előtöltött projektet indíthat. A lead, a kalkuláció, a termék- és ajánlati adatok újrarögzítés nélkül kerülhetnek a dokumentációba."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kezelhet-e egy auditor vagy szervező több első számú jogosultat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Igen. Több jogosulti szerződés és portfólió egy felületen kezelhető úgy, hogy a folyamatrendek, sablonok, anyaglisták, kivitelezők és dokumentumok jogosultonként elkülönülnek."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kérhető-e oktatás és support a rendszer mellé?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Igen. Igény szerint külön supportcsomag kérhető oktatóvideókkal, bevezetési támogatással és operatív segítséggel az első számú jogosultak, szervezők, auditorok és kivitelezők számára."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Elérhető lesz mobilalkalmazás?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A webes rendszer mellett hamarosan Android- és iOS-alkalmazás is elérhető lesz. A Google Play- és App Store-hivatkozások a publikálás után kerülnek aktiválásra."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A HEMApp helyettesíti a hivatalos MEKH EKR rendszert?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nem. A HEMApp a leadgenerálást, a projekt-előkészítést, a dokumentálást, az auditálást, a jóváhagyási munkafolyamatot és a HEM-köteg előkészítését támogatja. A hatósági nyilvántartási és elszámolási műveletek a hivatalos MEKH EKR rendszer szabályai szerint történnek."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+
+  <script>
+    // Az éles bevezetés előtt ezeket az értékeket állítsa be.
+    const SITE_CONFIG = {
+      demoUrl: "https://demo.hemapp.hu/",
+      contactEmail: "info@hemapp.hu"
+    };
+
+    document.querySelectorAll('a[href="https://hemapp.hu/"]').forEach(link => link.href = SITE_CONFIG.demoUrl);
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const header = document.getElementById('siteHeader');
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 18);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    menuToggle.addEventListener('click', () => {
+      const open = document.body.classList.toggle('menu-open');
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? 'Menü bezárása' : 'Menü megnyitása');
+    });
+    navLinks.addEventListener('click', e => {
+      if (e.target.closest('a')) {
+        document.body.classList.remove('menu-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+    document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
+    const roleTabs = document.querySelectorAll('.role-tab');
+    const rolePanels = document.querySelectorAll('.role-panel');
+    roleTabs.forEach(tab => tab.addEventListener('click', () => {
+      roleTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      rolePanels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      document.querySelector(`[data-panel="${tab.dataset.role}"]`).classList.add('active');
+    }));
+
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const open = item.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(open));
+      });
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const subject = encodeURIComponent(`HEMApp rendszerbemutató – ${data.get('company')}`);
+      const body = encodeURIComponent(
+        `Név: ${data.get('name')}\n` +
+        `Cég / szervezet: ${data.get('company')}\n` +
+        `E-mail: ${data.get('email')}\n` +
+        `Telefonszám: ${data.get('phone') || '-'}\n` +
+        `Érdeklődési terület: ${data.get('interest')}\n\n` +
+        `Üzenet:\n${data.get('message') || '-'}`
+      );
+      document.getElementById('formStatus').textContent = 'Az e-mail-tervezet megnyitása folyamatban…';
+      window.location.href = `mailto:${SITE_CONFIG.contactEmail}?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
 </html>
