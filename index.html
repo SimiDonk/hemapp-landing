@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HEMapp — HEM-projektek egy rendszerben, a felméréstől a hitelesítésig</title>
+    <meta
+      name="description"
+      content="A HEMapp a lakossági energiamegtakarítási (HEM) projektek teljes adminisztrációját egy rendszerbe zárja: kivitelező, elsődleges jogosult és auditor ugyanazon a projekten dolgozik — felmérés, rendelet szerinti HEM-számítás, szerződés e-aláírással, hitelesítés, kötegelt beadás."
+    />
+    <link rel="canonical" href="https://hemapp.hu/" />
+    <meta name="theme-color" content="#0b1620" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="hu_HU" />
+    <meta property="og:site_name" content="HEMapp" />
+    <meta property="og:url" content="https://hemapp.hu/" />
+    <meta
+      property="og:title"
+      content="HEMapp — HEM-projektek egy rendszerben"
+    />
+    <meta
+      property="og:description"
+      content="Kivitelező, jogosult és auditor ugyanazon a projekten: felmérés, rendelet szerinti HEM-számítás, szerződés e-aláírással, hitelesítés és kötegelt beadás egy platformon."
+    />
+    <!-- TODO: replace with a 1200x630 OG image once brand artwork is ready -->
+    <meta property="og:image" content="https://hemapp.hu/assets/hemapp-logo.png" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" href="/assets/hemapp-logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/hemapp-logo.png" />
+    <link rel="stylesheet" href="/style.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "HEMapp",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web, iOS, Android",
+        "inLanguage": "hu",
+        "url": "https://hemapp.hu/",
+        "description": "HEM-projektek (lakossági energiamegtakarítás) teljes körű adminisztrációja kivitelezőknek, elsődleges jogosultaknak és auditoroknak: terepi felmérés, rendelet szerinti HEM-számítás, szerződés elektronikus aláírással, hitelesítés és kötegelt MEKH-beadás.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Global Airconditional Kft.",
+          "email": "info@global-klima.hu",
+          "telephone": "+36306778084",
+          "vatID": "25130843-2-13",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Tengely utca 5.",
+            "postalCode": "2220",
+            "addressLocality": "Vecsés",
+            "addressCountry": "HU"
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#tartalom">Ugrás a tartalomra</a>
+
+    <header class="topbar">
+      <div class="wrap topbar__inner">
+        <a class="brand" href="/">
+          <img src="/assets/hemapp-logo.png" alt="" width="30" height="30" />
+          <span>HEM<i>app</i></span>
+        </a>
+
+        <button
+          class="nav__toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="fonav"
+          data-nav-toggle
+        >
+          Menü
+        </button>
+
+        <nav class="nav" id="fonav" aria-label="Fő navigáció">
+          <a href="#miert">Miért</a>
+          <a href="#funkciok">Funkciók</a>
+          <a href="#folyamat">Folyamat</a>
+          <a href="#kinek">Kinek szól</a>
+          <a href="/docs">Dokumentáció</a>
+          <a href="#kapcsolat">Kapcsolat</a>
+          <a class="btn btn--primary" href="https://demo.hemapp.hu" rel="noopener">Demó</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="tartalom">
+      <!-- ============ HERO ============ -->
+      <section class="hero">
+        <div class="wrap hero__inner">
+          <div>
+            <p class="eyebrow">Lakossági HEM-elszámolás · 17/2020. MEKH-rendelet</p>
+            <h1>Egy projekt.<br />Egy rendszer.<br /><em>Minden szereplő.</em></h1>
+            <p class="hero__lead">
+              A HEMapp a HEM-projekt teljes útját kezeli: a kivitelező a
+              helyszínen rögzít, a jogosult ellenőriz és jóváhagy, az auditor
+              hitelesít — ugyanazon a projekten, ugyanabban a rendszerben.
+              Nincs több e-mailben küldött táblázat és külön partnerportál.
+            </p>
+
+            <div class="hero__cta">
+              <a class="btn btn--primary" href="https://demo.hemapp.hu" rel="noopener">
+                Demó megnyitása
+              </a>
+              <a class="btn btn--ghost" href="#kapcsolat">Kapcsolatfelvétel</a>
+            </div>
+
+            <div class="hero__facts">
+              <span><b>6</b> szerepkör, egy felület</span>
+              <span><b>Rendelet szerinti</b> HEM-számítás</span>
+              <span><b>E-aláírás</b> a rendszerben</span>
+            </div>
+          </div>
+
+          <!-- The most characteristic artifact of this product: a project sheet. -->
+          <div class="sheet" role="group" aria-label="Minta projekt adatlap">
+            <div class="sheet__top">
+              <span>Projekt · HEM-2026-0431</span>
+              <span class="sheet__tag">minta</span>
+            </div>
+            <dl class="sheet__body">
+              <div class="sheet__row">
+                <dt>Kivitelezési helyszín</dt>
+                <dd>1114 Budapest</dd>
+              </div>
+              <div class="sheet__row">
+                <dt>Beavatkozás</dt>
+                <dd>Klíma · 3 helyiség</dd>
+              </div>
+              <div class="sheet__row">
+                <dt>Beltéri egységek</dt>
+                <dd>3 db · 7,1 kW</dd>
+              </div>
+              <div class="sheet__row">
+                <dt>Dokumentumok</dt>
+                <dd>8 / 8 feltöltve</dd>
+              </div>
+              <div class="sheet__calc">
+                <span>Számított energiamegtakarítás</span>
+                <strong>4 812<small>kWh / év</small></strong>
+              </div>
+            </dl>
+            <div class="sheet__foot">
+              <span class="pill" style="--st: var(--st-verified)">Hitelesítve</span>
+              <span>Auditori jóváhagyás után kötegbe került</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WHY ============ -->
+      <section class="section section--paper" id="miert">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Miért készült</p>
+            <h2 class="h2">A hiánypótlás nem a beadásnál keletkezik.</h2>
+            <p class="lead">
+              Egy HEM-projekt ma átlagosan három-négy rendszert jár be, mire
+              elszámolható lesz. Minden átadás egy újabb hely, ahol adat
+              vészik el, és minden elveszett adat egy hiánypótlási kör.
+            </p>
+          </div>
+
+          <div class="problems">
+            <div class="problem">
+              <h3>Három rendszer, egy projekt</h3>
+              <p>
+                A felmérés táblázatban, a szerződés szövegszerkesztőben, a
+                fotók e-mailben, a beadás egy negyedik felületen. Aki
+                összefűzi, az kézzel másol — és a kézi másolás hibázik.
+              </p>
+            </div>
+            <div class="problem">
+              <h3>A hiba a helyszínen születik</h3>
+              <p>
+                Egy hiányzó fotó vagy elírt teljesítmény a felmérésnél kerül a
+                rendszerbe, de csak a beadásnál derül ki. A javítás ilyenkor
+                már új kiszállás és hetek csúszás.
+              </p>
+            </div>
+            <div class="problem">
+              <h3>A HEM-érték nem vélemény</h3>
+              <p>
+                A megtakarítás számítását a rendelet meghatározza. Ha
+                táblázatban készül, minden sorát ellenőrizni kell; ha a
+                rendszer számolja a rögzített adatokból, elég auditálni.
+              </p>
+            </div>
+          </div>
+
+          <div class="diff">
+            <div class="diff__item">
+              <h3><span class="mark" aria-hidden="true">1</span>Egy platform, minden szereplő</h3>
+              <p>
+                Nem külön kivitelezői portál és külön auditori felület: egy
+                projekt, szerepkör szerinti hozzáféréssel. Ki mit lát és mit
+                módosíthat, azt az adatbázis dönti el, nem a felület.
+              </p>
+            </div>
+            <div class="diff__item">
+              <h3><span class="mark" aria-hidden="true">2</span>Beépített, rendelet szerinti számítás</h3>
+              <p>
+                Az energiamegtakarítás a rögzített helyiség-, teljesítmény- és
+                anyagadatokból automatikusan áll elő, és a projekt adatainak
+                változásakor újraszámolódik. Nincs külön kalkulációs fájl.
+              </p>
+            </div>
+            <div class="diff__item">
+              <h3><span class="mark" aria-hidden="true">3</span>Szerződés és e-aláírás bent</h3>
+              <p>
+                A szerződés sablonból, a projekt adataival generálódik, az
+                ügyfél e-mailben kapott linken írja alá. Nincs nyomtatás,
+                szkennelés, visszaküldés.
+              </p>
+            </div>
+            <div class="diff__item">
+              <h3><span class="mark" aria-hidden="true">4</span>Dokumentumkövetelmény folyamatrendenként</h3>
+              <p>
+                Minden jogosultnak más a dokumentumlistája. A rendszer a
+                projekt folyamatrendjéhez tartozó sablonokat és kötelező
+                dokumentumtípusokat kéri — így a hiány a feltöltésnél derül
+                ki, nem a beadásnál.
+              </p>
+            </div>
+            <div class="diff__item">
+              <h3><span class="mark" aria-hidden="true">5</span>Kötegelt beadás, végig követhetően</h3>
+              <p>
+                A hitelesített projektek kötegbe kerülnek, a köteg állapota
+                és tartalma követhető. Minden státuszváltás naplózott: látszik,
+                ki mit és mikor hagyott jóvá.
+              </p>
+            </div>
+            <div class="diff__item">
+              <h3><span class="mark" aria-hidden="true">6</span>Terepen is használható</h3>
+              <p>
+                A felület telefonon is teljes értékű, nem lekicsinyített
+                asztali nézet. A kivitelezőknek külön terepi alkalmazás
+                készül, offline felméréssel.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FEATURES ============ -->
+      <section class="section" id="funkciok">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Funkciók</p>
+            <h2 class="h2">Amit a rendszer elvégez</h2>
+            <p class="lead">
+              A HEMapp a napi működésre készült: projektnyitástól az
+              elszámolható, hitelesített projektig. A fejlesztés alatt álló
+              részeket jelöljük.
+            </p>
+          </div>
+
+          <div class="features">
+            <article class="feature">
+              <h3>Projektkezelés és státuszkövetés</h3>
+              <p>
+                Projektlista szűrőkkel és kereséssel, teljes adatlap,
+                automatikus státuszkezelés és intézkedést igénylő projektek
+                kiemelése.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>Terepi felmérés és fotódokumentáció</h3>
+              <p>
+                Helyiségenkénti klímarögzítés (beltéri/kültéri egység,
+                teljesítmény, nyílászárók), szigetelési adatok, kötelező
+                fotók és dokumentumok feltöltése.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>HEM-kalkulátor</h3>
+              <p>
+                Rendelet szerinti EKR-számítás: ingatlantípus, éghajlati zóna,
+                beavatkozás és teljesítmény alapján azonnali megtakarítási
+                érték — ajánlatadás előtt is.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>Szerződés és elektronikus aláírás</h3>
+              <p>
+                Sablonszerkesztő, a projekt adataival kitöltött szerződés,
+                PDF-generálás és e-mailes aláírási link. Aláírás után az
+                érintett adatok zárolhatók.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>Folyamatrendek és dokumentumsablonok</h3>
+              <p>
+                Jogosultanként külön folyamatrend: saját dokumentumtípusok,
+                sablonok és követelmények, központilag szerkeszthetően.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>Hiánypótlás-kezelés</h3>
+              <p>
+                Az auditor vagy a jogosult a projekten írja ki a hiányt, a
+                kivitelező ugyanott javítja. A kör zárt, nyomon követhető, és
+                nem e-mailben zajlik.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>Auditálás és kötegek</h3>
+              <p>
+                Auditori munkalista, hitelesítés, valamint a jóváhagyott
+                projektek beadási kötegekbe rendezése és követése.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>Controlling és számlázhatóság</h3>
+              <p>
+                A hitelesített projektek elszámolható állapotba kerülnek;
+                projektszintű pénzügyi áttekintés a kivitelezői díjjal és a
+                támogatási értékekkel.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>Anyagkatalógus</h3>
+              <p>
+                Központi anyag- és berendezéslista a számításhoz szükséges
+                műszaki paraméterekkel, kereshetően.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>Szervezet-, csapat- és jogosultságkezelés</h3>
+              <p>
+                Cégcsoportok, kivitelezői csapatok, tagok és szerepkörök;
+                szervezeti regisztráció és jóváhagyás.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>
+                Értékesítés
+                <span class="tag tag--soon">Fejlesztés alatt</span>
+              </h3>
+              <p>
+                Érdeklődések, ajánlatkészítés és HEM-piac: az érdeklődéstől a
+                megnyitott projektig egy folyamatban.
+              </p>
+            </article>
+            <article class="feature">
+              <h3>
+                Terepi mobilalkalmazás
+                <span class="tag tag--soon">Fejlesztés alatt</span>
+              </h3>
+              <p>
+                iOS- és Android-alkalmazás a kivitelezőknek, offline
+                felméréssel: a rögzítés hálózat nélkül is megy, a rendszer
+                utólag szinkronizál.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SIGNATURE: lifecycle track ============ -->
+      <section class="section section--ink" id="folyamat">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">A projekt útja</p>
+            <h2 class="h2">Egy projekt, hét állapot, négy szereplő</h2>
+            <p class="lead">
+              A HEMapp-ban a projekt állapota mondja meg, kinél van a labda. A
+              státuszváltás jogosultsághoz kötött, és minden lépés naplózott.
+            </p>
+          </div>
+
+          <div class="track" tabindex="0" role="group" aria-label="Projekt életciklus">
+            <div class="step" style="--st: var(--st-wait)">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__idx">01</span>
+              <span class="pill" style="--st: var(--st-wait)">Várakozik</span>
+              <span class="step__who">Kivitelező</span>
+              <p>
+                Projektnyitás, terepi felmérés, ügyféladatok, szerződés és
+                dokumentumok feltöltése.
+              </p>
+            </div>
+
+            <div class="step" style="--st: var(--st-check)">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__idx">02</span>
+              <span class="pill" style="--st: var(--st-check)">Ellenőrzés</span>
+              <span class="step__who">Jogosult / üzemeltetés</span>
+              <p>
+                Belső ellenőrzés beküldés előtt: a hiányzó vagy hibás adat itt
+                még javítható, auditori kör nélkül.
+              </p>
+            </div>
+
+            <div class="step" style="--st: var(--st-sent)">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__idx">03</span>
+              <span class="pill" style="--st: var(--st-sent)">Beküldve</span>
+              <span class="step__who">Auditor</span>
+              <p>
+                A projekt auditori munkalistára kerül a teljes
+                dokumentációval és a számított megtakarítással.
+              </p>
+            </div>
+
+            <div class="step step--branch" style="--st: var(--st-issue)">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__idx">visszakör</span>
+              <span class="pill" style="--st: var(--st-issue)">Hiánypótlás</span>
+              <span class="step__who">Kivitelező</span>
+              <p>
+                Konkrét, tételes hiánylista a projekten. Javítás után egy
+                gombbal megy vissza ellenőrzésre.
+              </p>
+            </div>
+
+            <div class="step" style="--st: var(--st-approved)">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__idx">04</span>
+              <span class="pill" style="--st: var(--st-approved)">Jóváhagyva</span>
+              <span class="step__who">Auditor</span>
+              <p>
+                Az audit lezárult, a projekt megfelel a folyamatrend
+                követelményeinek.
+              </p>
+            </div>
+
+            <div class="step" style="--st: var(--st-verified)">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__idx">05</span>
+              <span class="pill" style="--st: var(--st-verified)">Hitelesítve</span>
+              <span class="step__who">Jogosult</span>
+              <p>
+                A hitelesített projekt beadási kötegbe kerül, a köteg
+                állapota végig követhető.
+              </p>
+            </div>
+
+            <div class="step" style="--st: var(--st-billable)">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__idx">06</span>
+              <span class="pill" style="--st: var(--st-billable)">Jogosult</span>
+              <span class="step__who">Controlling</span>
+              <p>
+                A projekt elszámolható: a kivitelezői díj és a támogatási
+                értékek egy helyen látszanak.
+              </p>
+            </div>
+          </div>
+
+          <p class="track__note">
+            <b>A státuszok a rendszer valódi állapotai</b> — nem marketing
+            ábra. Az elutasított projekt külön állapotba kerül indoklással, a
+            jogosulti hiánypótlás pedig ugyanezen a nyomvonalon fut, csak más
+            szereplővel.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ AUDIENCE ============ -->
+      <section class="section section--paper" id="kinek">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Kinek szól</p>
+            <h2 class="h2">Ugyanaz a projekt, más nézet</h2>
+            <p class="lead">
+              A HEM-elszámolás minden szereplője ugyanabban az
+              alkalmazásban dolgozik. Nincs adatátadás rendszerek között, mert
+              nincs másik rendszer.
+            </p>
+          </div>
+
+          <div class="roles">
+            <article class="role" style="--st: var(--st-verified)">
+              <p class="role__role">Elsődleges jogosult</p>
+              <h3>Kötelezettség teljesítése, végig látható portfólióval</h3>
+              <ul>
+                <li>Saját folyamatrend, dokumentumtípusok és sablonok</li>
+                <li>Ellenőrzési kör beküldés előtt</li>
+                <li>Hitelesítés és beadási kötegek kezelése</li>
+                <li>Teljesített megtakarítás projektszinten</li>
+              </ul>
+            </article>
+
+            <article class="role" style="--st: var(--st-approved)">
+              <p class="role__role">Kivitelező · cégcsoport és csapatok</p>
+              <h3>Kevesebb adminisztráció, kevesebb visszakör</h3>
+              <ul>
+                <li>Projektnyitás és terepi rögzítés telefonon is</li>
+                <li>Kötelező dokumentumok listája előre látszik</li>
+                <li>Szerződés generálás és e-aláírás</li>
+                <li>Csapatok, tagok, saját projektportfólió</li>
+              </ul>
+            </article>
+
+            <article class="role" style="--st: var(--st-sent)">
+              <p class="role__role">Auditor</p>
+              <h3>Auditálható dokumentáció, rendezett munkalista</h3>
+              <ul>
+                <li>Egy helyen a projekt teljes dokumentációja</li>
+                <li>Tételes hiánypótlás kiírása a projekten</li>
+                <li>Jóváhagyás és hitelesítés naplózva</li>
+                <li>Kötegelt kezelés a beadáshoz</li>
+              </ul>
+            </article>
+
+            <article class="role" style="--st: var(--st-issue)">
+              <p class="role__role">Értékesítés<span class="tag tag--soon" style="margin-left:.5rem">Fejlesztés alatt</span></p>
+              <h3>Érdeklődéstől a megnyitott projektig</h3>
+              <ul>
+                <li>Érdeklődések nyilvántartása</li>
+                <li>Ajánlatkészítés HEM-értékkel</li>
+                <li>Elfogadott ajánlatból projekt</li>
+                <li>HEM-piac a jogosult és a kivitelező között</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DOCS TEASER ============ -->
+      <section class="section" id="dokumentacio">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Dokumentáció és segédletek</p>
+            <h2 class="h2">Leírások, videók, jogi tájékoztatók</h2>
+            <p class="lead">
+              A használati útmutatókat, videós segédleteket és a jogi
+              dokumentumokat külön oldalon gyűjtjük, hogy a bevezetés ne
+              e-mailes kérdezgetésből álljon.
+            </p>
+          </div>
+
+          <div class="docs-grid">
+            <a class="doc-card" href="/docs#kezikonyvek">
+              <h3>Használati útmutatók</h3>
+              <p>
+                Szerepkörönként: kivitelező, auditor, jogosult — mit hol
+                talál, mit mikor kell rögzíteni.
+              </p>
+            </a>
+            <a class="doc-card" href="/docs#videok">
+              <h3>Videós segédletek</h3>
+              <p>
+                Rövid képernyőfelvételek a gyakori műveletekről:
+                projektnyitás, felmérés, beküldés, hitelesítés.
+              </p>
+            </a>
+            <a class="doc-card" href="/docs#hem-szamitas">
+              <h3>A HEM-számításról</h3>
+              <p>
+                Mit számol a rendszer, milyen bemenetekből, és mire alapozza a
+                rendelet szerint.
+              </p>
+            </a>
+            <a class="doc-card" href="/docs#adatkezeles">
+              <h3>Adatkezelés és cookie-k</h3>
+              <p>
+                Adatkezelési tájékoztató, cookie-tájékoztató és a
+                szerződéses feltételek.
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CTA ============ -->
+      <section class="section" id="demo">
+        <div class="wrap">
+          <div class="cta on-dark">
+            <div>
+              <p class="eyebrow">Demó és bevezetés</p>
+              <h2>Nézze meg éles projekten, mit rövidít le.</h2>
+              <p>
+                A bemutató hozzáférés regisztráció nélkül, egy kattintással
+                nyílik — kivitelezői szerepkörben, valódi mintaprojektekkel.
+                Szívesen végig is vezetjük rajta egy online egyeztetésen, a
+                saját folyamatrendjük példáján.
+              </p>
+            </div>
+            <div class="cta__actions">
+              <a class="btn btn--primary" href="https://demo.hemapp.hu" rel="noopener">
+                Demó megnyitása
+              </a>
+              <a
+                class="btn btn--ghost"
+                href="mailto:info@global-klima.hu?subject=HEMapp%20bemutat%C3%B3%20k%C3%A9r%C3%A9s"
+              >
+                Bemutatót kérek
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <section class="section section--ink" id="kapcsolat">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Kapcsolat</p>
+            <h2 class="h2">Beszéljünk a folyamatrendjükről</h2>
+            <p class="lead">
+              A HEMapp fejlesztője és üzemeltetője a Global Airconditional
+              Kft. — klíma- és hőszivattyú-szakmai háttérrel, saját
+              kivitelezői tapasztalatból.
+            </p>
+          </div>
+
+          <div class="contact">
+            <dl>
+              <div>
+                <dt>Cégnév</dt>
+                <dd>Global Airconditional Kft.</dd>
+              </div>
+              <div>
+                <dt>Székhely</dt>
+                <dd>2220 Vecsés, Tengely utca 5.</dd>
+              </div>
+              <div>
+                <dt>Adószám</dt>
+                <dd>25130843-2-13</dd>
+              </div>
+              <div>
+                <dt>Cégjegyzékszám</dt>
+                <dd>13-09-189092</dd>
+              </div>
+            </dl>
+
+            <dl>
+              <div>
+                <dt>E-mail</dt>
+                <dd><a href="mailto:info@global-klima.hu">info@global-klima.hu</a></dd>
+              </div>
+              <div>
+                <dt>Telefon</dt>
+                <dd><a href="tel:+36306778084">+36 30 677 8084</a></dd>
+              </div>
+              <div>
+                <dt>Weboldal</dt>
+                <dd>
+                  <a href="https://www.global-klima.hu" rel="noopener">
+                    global-klima.hu
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt>Kapcsolatfelvétel</dt>
+                <dd>
+                  <a
+                    href="mailto:info@global-klima.hu?subject=HEMapp%20%C3%A9rdekl%C5%91d%C3%A9s"
+                  >
+                    Írjon nekünk a HEMapp-ról
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <p>© 2026 Global Airconditional Kft. · HEMapp</p>
+        <nav aria-label="Lábléc navigáció">
+          <a href="/docs">Dokumentáció</a>
+          <a href="/docs#adatkezeles">Adatkezelési tájékoztató</a>
+          <a href="/docs#cookie">Cookie-tájékoztató</a>
+          <a href="#kapcsolat">Kapcsolat</a>
+          <button type="button" data-cookie-reopen>Cookie-beállítások</button>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- GDPR consent: nothing beyond the consent record itself is stored
+         before an explicit choice, and analytics only loads on "accept". -->
+    <div
+      class="cookie"
+      id="cookie-banner"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="cookie-title"
+      aria-describedby="cookie-desc"
+    >
+      <div class="cookie__box">
+        <div>
+          <h2 id="cookie-title">Cookie-k és mérés</h2>
+          <p id="cookie-desc">
+            Az oldal működéséhez csak a hozzájárulás tényét tároljuk a
+            böngészőjében. Statisztikai mérést kizárólag az Ön
+            hozzájárulásával indítunk, és azt bármikor visszavonhatja a lábléc
+            „Cookie-beállítások" pontjában.
+            <a href="/docs#cookie">Cookie-tájékoztató</a>
+          </p>
+        </div>
+        <div class="cookie__actions">
+          <button class="btn btn--primary" type="button" data-consent="granted">
+            Elfogadom
+          </button>
+          <button class="btn btn--ghost" type="button" data-consent="denied">
+            Csak a szükségesek
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/site.js" defer></script>
+  </body>
+</html>
