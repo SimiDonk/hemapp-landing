@@ -452,15 +452,13 @@
 
     /* Footer */
     .site-footer { padding: 38px 0 22px; color: #8ca5b7; background: #04101c; }
-    .footer-top { display: grid; grid-template-columns: auto 1fr; gap: 42px; align-items: center; padding-bottom: 26px; border-bottom: 1px solid rgba(255,255,255,.08); }
-    .footer-badges { display: flex; align-items: center; gap: 14px; }
+    .footer-top { display: grid; grid-template-columns: auto 1fr auto auto; gap: 26px; align-items: center; padding-bottom: 26px; border-bottom: 1px solid rgba(255,255,255,.08); }
     .footer-brand { display: flex; align-items: center; gap: 14px; }
-    .footer-brand-logo { width: 88px; height: 88px; object-fit: contain; border-radius: 10px; background: #fff; }
+    .footer-brand-logo { width: 88px; height: 88px; object-fit: contain; }
     .footer-brand strong { display: block; color: #fff; font-family: Manrope; font-size: 1.05rem; }
     .footer-brand span { display: block; font-size: .7rem; }
-    .footer-rating { width: 156px; height: 88px; overflow: hidden; border: 1px solid rgba(226,190,92,.3); border-radius: 10px; background: #f4f4f4; }
+    .footer-rating { width: 156px; height: 88px; overflow: hidden; }
     .footer-rating img { width: 100%; height: 100%; object-fit: contain; }
-    .footer-nav-area { display: grid; grid-template-columns: auto auto; justify-content: end; align-items: center; gap: 26px; }
     .footer-links { display: grid; grid-template-columns: repeat(3, minmax(120px, auto)); gap: 9px 24px; font-size: .75rem; }
     .footer-links a:hover, .footer-links button:hover { color: #fff; }
     .footer-links button { padding: 0; border: 0; color: inherit; background: none; cursor: pointer; }
@@ -569,10 +567,8 @@
       .demo-actions { grid-template-columns: 1fr; }
       .form-grid, .contact-grid { grid-template-columns: 1fr; }
       .footer-top, .footer-bottom { grid-template-columns: 1fr; display: grid; }
-      .footer-nav-area { grid-template-columns: 1fr; justify-content: stretch; justify-items: start; }
       .footer-links { grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; gap: 10px 16px; }
       .footer-contacts { justify-content: flex-start; }
-      .footer-badges { align-items: flex-start; }
       .cookie__box { grid-template-columns: 1fr; }
     }
 
@@ -1050,37 +1046,33 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top">
-        <div class="footer-badges">
-          <div class="footer-brand">
-            <img class="footer-brand-logo" src="/assets/hemapp-logo.png" alt="HEMApp" width="100" height="100">
-            <div><strong>HEMApp</strong><span>Projektmenedzsment platform</span></div>
-          </div>
-          <div class="footer-rating">
-            <img src="/assets/bisnode_aaa_gold.png" alt="AAA Highest Creditworthiness Gold minősítés" width="492" height="277">
-          </div>
+        <div class="footer-brand">
+          <img class="footer-brand-logo" src="/assets/hemapp-logo-transparent.png" alt="HEMApp" width="256" height="256">
+          <div><strong>HEMApp</strong><span>Projektmenedzsment platform</span></div>
         </div>
-        <div class="footer-nav-area">
-          <nav class="footer-links" aria-label="Lábléc navigáció">
-            <a href="#ekr-hem">EKR és HEM</a>
-            <a href="#leadmotor">Leadmotor</a>
-            <a href="#platform">Rendszer</a>
-            <a href="#support">Support</a>
-            <a href="#gyik">GYIK</a>
-            <a href="#kapcsolat">Kapcsolat</a>
-            <a href="/docs#adatkezeles">Adatkezelés</a>
-            <a href="/docs#cookie">Cookie-tájékoztató</a>
-            <button type="button" data-cookie-reopen>Cookie-beállítások</button>
-          </nav>
-          <div class="footer-contacts" aria-label="Elérhetőségek">
-            <a class="footer-contact-link" href="tel:+36703161233">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
-              06 70 316 1233
-            </a>
-            <a class="footer-contact-link" href="mailto:info@hemapp.hu">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
-              info@hemapp.hu
-            </a>
-          </div>
+        <nav class="footer-links" aria-label="Lábléc navigáció">
+          <a href="#ekr-hem">EKR és HEM</a>
+          <a href="#leadmotor">Leadmotor</a>
+          <a href="#platform">Rendszer</a>
+          <a href="#support">Support</a>
+          <a href="#gyik">GYIK</a>
+          <a href="#kapcsolat">Kapcsolat</a>
+          <a href="/docs#adatkezeles">Adatkezelés</a>
+          <a href="/docs#cookie">Cookie-tájékoztató</a>
+          <button type="button" data-cookie-reopen>Cookie-beállítások</button>
+        </nav>
+        <div class="footer-contacts" aria-label="Elérhetőségek">
+          <a class="footer-contact-link" href="tel:+36703161233">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
+            06 70 316 1233
+          </a>
+          <a class="footer-contact-link" href="mailto:info@hemapp.hu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+            info@hemapp.hu
+          </a>
+        </div>
+        <div class="footer-rating">
+          <img src="/assets/bisnode_aaa_gold_transparent.png" alt="AAA Highest Creditworthiness Gold minősítés" width="400" height="225">
         </div>
       </div>
       <div class="footer-bottom">
