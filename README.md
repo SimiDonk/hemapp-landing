@@ -1,4 +1,4 @@
-# HEMapp OnePage – végleges változat
+# HEMApp OnePage – végleges változat
 
 ## Indítás
 Az `index.html` önállóan megnyitható böngészőben, vagy feltölthető bármely statikus webszerverre.
@@ -8,7 +8,7 @@ Az `index.html` végén található `SITE_CONFIG` objektumban módosítható:
 
 ```js
 const SITE_CONFIG = {
-  demoUrl: "https://hemapp.hu/",
+  demoUrl: "https://demo.hemapp.hu/",
   contactEmail: "info@hemapp.hu"
 };
 ```

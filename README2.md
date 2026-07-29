@@ -1,6 +1,6 @@
-# HEMapp landing (hemapp.hu)
+# HEMApp landing (hemapp.hu)
 
-A HEMapp publikus bemutatkozó oldala. **Statikus HTML — nincs build, nincs
+A HEMApp publikus bemutatkozó oldala. **Statikus HTML — nincs build, nincs
 dependency.** Aki HTML-t és CSS-t ír, az tudja szerkeszteni.
 
 ```
@@ -32,7 +32,7 @@ telepítési lépés nincs, a build egy-két perc.
 | Cím | Mi van ott |
 | --- | --- |
 | `hemapp.hu` | ez az oldal |
-| `app.hemapp.hu` | a HEMapp alkalmazás (másik repóban) |
+| `app.hemapp.hu` | a HEMApp alkalmazás (másik repóban) |
 | `demo.hemapp.hu` | a bemutató környezet — ide mutatnak a „Demó" gombok |
 
 ## Amit érdemes tudni szerkesztés előtt

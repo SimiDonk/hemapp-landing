@@ -1,4 +1,4 @@
-// HEMapp landing — mobile nav, GDPR consent, scroll reveal. No dependencies.
+// HEMApp landing — mobile nav, GDPR consent, scroll reveal. No dependencies.
 
 (function () {
   "use strict";

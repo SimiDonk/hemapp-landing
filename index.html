@@ -609,7 +609,7 @@
           <h1>A lakossági leadtől a <span>HEM megvalósításáig.</span></h1>
           <p class="hero-lead">A HEMApp egy közös platform, ahol az első számú jogosultak, szervezők, auditorok és kivitelezők összehangoltan és tömegesen kezelhetik energiahatékonysági projektjeiket.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://hemapp.hu/" target="_blank" rel="noopener">
+            <a class="btn btn-primary" href="https://demo.hemapp.hu/" target="_blank" rel="noopener">
               Kivitelezői demórendszer kipróbálása
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
@@ -980,7 +980,7 @@
             </div>
           </div>
           <div class="demo-actions">
-            <a class="btn btn-primary" href="https://hemapp.hu/" target="_blank" rel="noopener">Kivitelezői demórendszer kipróbálása</a>
+            <a class="btn btn-primary" href="https://demo.hemapp.hu/" target="_blank" rel="noopener">Kivitelezői demórendszer kipróbálása</a>
             <a class="btn btn-secondary" href="#kapcsolat">Jogosulti / auditori bemutatót kérek</a>
             <small>A demó új böngészőfülön nyílik meg, és szabadon végigkattintható.</small>
           </div>
@@ -1177,11 +1177,9 @@
   <script>
     // Az éles bevezetés előtt ezeket az értékeket állítsa be.
     const SITE_CONFIG = {
-      demoUrl: "https://demo.hemapp.hu/",
       contactEmail: "info@hemapp.hu"
     };
 
-    document.querySelectorAll('a[href="https://hemapp.hu/"]').forEach(link => link.href = SITE_CONFIG.demoUrl);
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const header = document.getElementById('siteHeader');
