@@ -227,9 +227,6 @@
     .merchant-step strong { display: block; font-size: .9rem; }
     .merchant-step small { color: #93adbf; }
     .merchant-step em { padding: 6px 8px; border-radius: 8px; color: var(--teal-2); font-size: .65rem; font-style: normal; font-weight: 800; background: rgba(19,200,162,.11); }
-    .merchant-result { margin-top: 8px; padding: 20px; border-radius: 18px; color: #083244; background: linear-gradient(135deg, #b8ecfb, #a8f1dc); }
-    .merchant-result small { font-weight: 700; opacity: .72; }
-    .merchant-result strong { display: block; margin-top: 6px; font-family: Manrope; font-size: 1.2rem; }
 
     /* Lead engine */
     .lead-grid { display: grid; grid-template-columns: .88fr 1.12fr; gap: 64px; align-items: center; }
@@ -302,9 +299,10 @@
     .process-track { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0; position: relative; }
     .process-track::before { content: ""; position: absolute; left: 5%; right: 5%; top: 34px; height: 2px; background: linear-gradient(90deg, var(--cyan), var(--teal)); opacity: .55; }
     .process-step { position: relative; z-index: 1; padding: 0 10px; text-align: center; }
-    .process-icon { width: 68px; height: 68px; display: grid; place-items: center; margin: 0 auto 19px; border: 7px solid var(--mist); border-radius: 22px; color: #0d7ea5; background: #fff; box-shadow: 0 10px 25px rgba(17,59,84,.09); }
+    .process-icon { width: 68px; height: 68px; display: grid; place-items: center; margin: 0 auto 19px; border: 7px solid var(--mist); border-radius: 22px; color: #0d7ea5; background: #fff; box-shadow: 0 10px 25px rgba(17,59,84,.09); font-size: 1.55rem; line-height: 1; }
+    .process-icon svg { width: 28px; height: 28px; }
     .process-step strong { display: block; font-size: .82rem; }
-    .process-step span { display: block; margin-top: 7px; color: var(--muted); font-size: .7rem; line-height: 1.45; }
+    .process-step > span:not(.process-icon) { display: block; margin-top: 7px; color: var(--muted); font-size: .7rem; line-height: 1.45; }
 
     /* Feature grid */
     .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -436,6 +434,7 @@
     .contact-types { display: grid; gap: 10px; }
     .contact-type { display: flex; align-items: center; gap: 12px; padding: 13px 15px; border: 1px solid rgba(255,255,255,.11); border-radius: 14px; color: #d8e7ef; background: rgba(255,255,255,.045); }
     .contact-type b { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px; color: #062f41; background: var(--cyan-2); }
+    .contact-form-column { display: grid; gap: 16px; }
     .contact-form { padding: 30px; border: 1px solid rgba(255,255,255,.12); border-radius: 24px; background: rgba(255,255,255,.055); backdrop-filter: blur(14px); }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .form-group { display: grid; gap: 7px; }
@@ -453,14 +452,22 @@
 
     /* Footer */
     .site-footer { padding: 38px 0 22px; color: #8ca5b7; background: #04101c; }
-    .footer-top { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; padding-bottom: 26px; border-bottom: 1px solid rgba(255,255,255,.08); }
-    .footer-brand { display: flex; align-items: center; gap: 13px; }
-    .footer-brand .brand-mark { width: 34px; height: 34px; }
-    .footer-brand strong { color: #fff; font-family: Manrope; }
+    .footer-top { display: grid; grid-template-columns: auto 1fr; gap: 42px; align-items: center; padding-bottom: 26px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .footer-badges { display: flex; align-items: center; gap: 14px; }
+    .footer-brand { display: flex; align-items: center; gap: 14px; }
+    .footer-brand-logo { width: 88px; height: 88px; object-fit: contain; border-radius: 10px; background: #fff; }
+    .footer-brand strong { display: block; color: #fff; font-family: Manrope; font-size: 1.05rem; }
     .footer-brand span { display: block; font-size: .7rem; }
-    .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 18px; font-size: .75rem; }
+    .footer-rating { width: 156px; height: 88px; overflow: hidden; border: 1px solid rgba(226,190,92,.3); border-radius: 10px; background: #f4f4f4; }
+    .footer-rating img { width: 100%; height: 100%; object-fit: contain; }
+    .footer-nav-area { display: grid; grid-template-columns: auto auto; justify-content: end; align-items: center; gap: 26px; }
+    .footer-links { display: grid; grid-template-columns: repeat(3, minmax(120px, auto)); gap: 9px 24px; font-size: .75rem; }
     .footer-links a:hover, .footer-links button:hover { color: #fff; }
     .footer-links button { padding: 0; border: 0; color: inherit; background: none; cursor: pointer; }
+    .footer-links a, .footer-links button { text-align: left; }
+    .footer-contacts { display: grid; gap: 10px; }
+    .footer-contact-link { display: inline-flex; align-items: center; gap: 7px; padding: 9px 12px; border: 1px solid rgba(120,213,244,.25); border-radius: 11px; color: #dff7ff; background: rgba(42,169,223,.11); font-size: .75rem; font-weight: 800; }
+    .footer-contact-link svg { width: 15px; height: 15px; color: var(--cyan-2); }
     .footer-bottom { display: flex; justify-content: space-between; gap: 25px; padding-top: 20px; font-size: .66rem; }
     .footer-bottom p { margin: 0; max-width: 760px; }
 
@@ -562,7 +569,10 @@
       .demo-actions { grid-template-columns: 1fr; }
       .form-grid, .contact-grid { grid-template-columns: 1fr; }
       .footer-top, .footer-bottom { grid-template-columns: 1fr; display: grid; }
-      .footer-links { justify-content: flex-start; }
+      .footer-nav-area { grid-template-columns: 1fr; justify-content: stretch; justify-items: start; }
+      .footer-links { grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; gap: 10px 16px; }
+      .footer-contacts { justify-content: flex-start; }
+      .footer-badges { align-items: flex-start; }
       .cookie__box { grid-template-columns: 1fr; }
     }
 
@@ -613,7 +623,7 @@
               Kivitelezői demórendszer kipróbálása
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a class="btn btn-secondary" href="#kapcsolat">Jogosulti / auditori bemutató</a>
+            <a class="btn btn-secondary" href="#kapcsolat">Jogosulti / Auditori bemutató</a>
           </div>
           <div class="hero-audience">
             <strong>Egy rendszerben:</strong>
@@ -689,7 +699,7 @@
         <div class="merchant-panel" data-reveal>
           <div class="merchant-copy">
             <span class="eyebrow">Építőanyag-kereskedőknek</span>
-            <h2>A kereskedelmi értékesítés mellé előzetesen kalkulálható, HEM hozzájárulás kapcsolható.</h2>
+            <h2>Növelje értékesítését HEM-hozzájárulással!</h2>
             <p>Ha az ingatlan és a tervezett korszerűsítés megfelel az EKR feltételeinek, a kalkulátor előzetesen számszerűsítheti a várható energiamegtakarítást és az ahhoz kapcsolható HEM értékét. A kereskedő így nem csupán terméket értékesít: a vásárlónak pénzügyi előnyt, kivitelezői ajánlatot és egy végigvezetett, auditálható dokumentációs folyamatot is kínálhat – külön pályázati eljárás nélkül.</p>
             <div class="merchant-points">
             </div>
@@ -701,7 +711,6 @@
               <div class="merchant-step"><b>2</b><div><strong>Jóváhagyott saját terméklista</strong><small>Meghatározható, hogy a kalkulátorban és a kivitelezői projektekben mely gyártók, termékek, anyagok és berendezések legyenek elérhetők, így a partnerek kizárólag az előzetesen engedélyezett kínálathoz használhatják fel a támogatást.</small></div><em>SAJÁT KÍNÁLAT</em></div>
               <div class="merchant-step"><b>3</b><div><strong>Egy kattintással projekt nyitás az ajánlatokból</strong><small>A nyertes ajánlat adatai újrarögzítés nélkül kerülnek a kivitelezési folyamatba</small></div><em>PROJEKT</em></div>
               <div class="merchant-step"><b>4</b><div><strong>Egy kattintással projekt nyitás az ajánlatokból</strong><small>A rendszer számszerűsített, strukturált leadeket hoz létre az ingatlan, a tervezett beruházás, a kiválasztott termékek és az előzetes kalkuláció adataival. A leadekhez kizárólag a kijelölt kivitelezők férhetnek hozzá és adhatnak ajánlatot, így az érdeklődés és a teljes értékesítési lehetőség a saját partneri ökoszisztémán belül marad.</small></div><em>ZÁRT KÖR</em></div>
-              <div class="merchant-result"><small>Üzleti eredmény</small><strong>Anyagértékesítés + HEM-hozzájárulás + kivitelezés + auditálható dokumentáció egy összekapcsolt folyamatban</strong></div>
             </div>
           </div>
         </div>
@@ -804,10 +813,10 @@
           <div class="process-step"><span class="process-icon">∑</span><strong>Kalkuláció</strong><span>Előzetes energiamegtakarítási és HEM-potenciál</span></div>
           <div class="process-step"><span class="process-icon">◎</span><strong>Ajánlat</strong><span>Kizárólag a kijelölt saját kivitelezői körben</span></div>
           <div class="process-step"><span class="process-icon">✎</span><strong>Előzetes elemzés és megállapodás</strong><span>Szerződés és jogosulti feltételek rögzítése</span></div>
-          <div class="process-step"><span class="process-icon">⌁</span><strong>Kivitelezés</strong><span>Engedélyezett anyagok, műszaki adatok és fényképek</span></div>
-          <div class="process-step"><span class="process-icon">▤</span><strong>Teljes dokumentáció</strong><span>Szerződések, nyilatkozatok, számla és bizonyítékok</span></div>
+          <div class="process-step"><span class="process-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5-5L12 3.6 9.6 6 7.3 3.7a4 4 0 0 0 5 5l-9.8 9.8a2.1 2.1 0 0 0 3 3l9.8-9.8a4 4 0 0 0 5-5L18 9l-2.4-2.4z"/></svg></span><strong>Kivitelezés</strong><span>Engedélyezett anyagok, műszaki adatok és fényképek</span></div>
+          <div class="process-step"><span class="process-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h4"/><path d="m9 18 2-2 1.5 1.5L16 14"/></svg></span><strong>Teljes dokumentáció</strong><span>Szerződések, nyilatkozatok, számla és bizonyítékok</span></div>
           <div class="process-step"><span class="process-icon">✓</span><strong>Audit</strong><span>Ellenőrzés, hiánypótlás, GJ és jóváhagyás</span></div>
-          <div class="process-step"><span class="process-icon">▱</span><strong>MEKH-bejegyzés</strong><span>HEM-köteg, azonosítás és hivatalos EKR-nyilvántartás</span></div>
+          <div class="process-step"><span class="process-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></span><strong>MEKH-bejegyzés</strong><span>HEM-köteg, azonosítás és hivatalos EKR-nyilvántartás</span></div>
         </div>
       </div>
     </section>
@@ -1018,19 +1027,22 @@
           </div>
         </div>
 
-        <form class="contact-form" id="contactForm" data-reveal>
-          <div class="form-grid">
-            <div class="form-group"><label for="name">Név</label><input id="name" name="name" autocomplete="name" required></div>
-            <div class="form-group"><label for="company">Cég / szervezet</label><input id="company" name="company" autocomplete="organization" required></div>
-            <div class="form-group"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-            <div class="form-group"><label for="phone">Telefonszám</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
-            <div class="form-group full"><label for="interest">Melyik terület érdekli?</label><select id="interest" name="interest" required><option value="">Válasszon…</option><option>Első számú jogosulti / szervezői rendszer</option><option>Auditori rendszer</option><option>Leadgenerálás és kivitelezői partnerkör</option><option>Építőanyag-kereskedői együttműködés</option><option>Bevezetés, oktatás és support</option><option>Teljes platform</option></select></div>
-            <div class="form-group full"><label for="message">Rövid üzenet</label><textarea id="message" name="message" placeholder="Projektvolumen, szerepkör, partnerhálózat vagy a kívánt bemutató témája…"></textarea></div>
-          </div>
-          <label class="form-check"><input type="checkbox" name="privacyConsent" required><span>Hozzájárulok, hogy a megadott adataim alapján a HEMApp képviselője kapcsolatba lépjen velem. Elolvastam az <a href="/docs#adatkezeles" target="_blank" rel="noopener">adatkezelési tájékoztatót</a>. Az űrlap jelen változata e-mail-tervezetet készít.</span></label>
-          <button class="btn btn-primary" type="submit">Bemutatót kérek</button>
-          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
-        </form>
+        <div class="contact-form-column">
+          <form class="contact-form" id="contactForm" data-reveal>
+            <div class="form-grid">
+              <div class="form-group"><label for="name">Név</label><input id="name" name="name" autocomplete="name" required></div>
+              <div class="form-group"><label for="company">Cég / szervezet</label><input id="company" name="company" autocomplete="organization" required></div>
+              <div class="form-group"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+              <div class="form-group"><label for="phone">Telefonszám</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+              <div class="form-group full"><label for="interest">Érdeklődés mint</label><select id="interest" name="interest" required><option value="">Válasszon…</option><option>Első számú jogosult</option><option>Szervező</option><option>Auditor</option><option>Kereskedő</option></select></div>
+              <div class="form-group full"><label for="message">Rövid üzenet</label><textarea id="message" name="message" placeholder="Projektvolumen, szerepkör, partnerhálózat vagy a kívánt bemutató témája…"></textarea></div>
+            </div>
+            <label class="form-check"><input type="checkbox" name="privacyConsent" required><span>Hozzájárulok, hogy a megadott adataim alapján a HEMApp képviselője kapcsolatba lépjen velem. Elolvastam az <a href="/docs#adatkezeles" target="_blank" rel="noopener">adatkezelési tájékoztatót</a>. Az űrlap jelen változata e-mail-tervezetet készít.</span></label>
+            <button class="btn btn-primary" type="submit">Bemutatót kérek</button>
+            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+          </form>
+
+        </div>
       </div>
     </section>
   </main>
@@ -1038,15 +1050,42 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top">
-        <div class="footer-brand">
-          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7adbf7"/><stop offset="1" stop-color="#55e2c8"/></linearGradient></defs><path d="M24 3.5 42 14v20L24 44.5 6 34V14Z" fill="none" stroke="url(#lf)" stroke-width="2.4"/><path d="M14 16.5 24 10l10 6.5-10 6.4Z" fill="url(#lf)"/><path d="M14 20.4 22 25v10.2l-8-4.6Zm20 0-8 4.6v10.2l8-4.6Z" fill="url(#lf)" opacity=".76"/></svg>
-          <div><strong>HEMAPP</strong><span>HEM projektmenedzsment és együttműködési platform</span></div>
+        <div class="footer-badges">
+          <div class="footer-brand">
+            <img class="footer-brand-logo" src="/assets/hemapp-logo.png" alt="HEMApp" width="100" height="100">
+            <div><strong>HEMApp</strong><span>Projektmenedzsment platform</span></div>
+          </div>
+          <div class="footer-rating">
+            <img src="/assets/bisnode_aaa_gold.png" alt="AAA Highest Creditworthiness Gold minősítés" width="492" height="277">
+          </div>
         </div>
-        <div class="footer-links"><a href="#ekr-hem">EKR és HEM</a><a href="#leadmotor">Leadmotor</a><a href="#platform">Rendszer</a><a href="#support">Support</a><a href="#gyik">GYIK</a><a href="#kapcsolat">Kapcsolat</a><a href="/docs#adatkezeles">Adatkezelés</a><a href="/docs#cookie">Cookie-tájékoztató</a><button type="button" data-cookie-reopen>Cookie-beállítások</button></div>
+        <div class="footer-nav-area">
+          <nav class="footer-links" aria-label="Lábléc navigáció">
+            <a href="#ekr-hem">EKR és HEM</a>
+            <a href="#leadmotor">Leadmotor</a>
+            <a href="#platform">Rendszer</a>
+            <a href="#support">Support</a>
+            <a href="#gyik">GYIK</a>
+            <a href="#kapcsolat">Kapcsolat</a>
+            <a href="/docs#adatkezeles">Adatkezelés</a>
+            <a href="/docs#cookie">Cookie-tájékoztató</a>
+            <button type="button" data-cookie-reopen>Cookie-beállítások</button>
+          </nav>
+          <div class="footer-contacts" aria-label="Elérhetőségek">
+            <a class="footer-contact-link" href="tel:+36703161233">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
+              06 70 316 1233
+            </a>
+            <a class="footer-contact-link" href="mailto:info@hemapp.hu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+              info@hemapp.hu
+            </a>
+          </div>
+        </div>
       </div>
       <div class="footer-bottom">
         <p>© <span id="year"></span> HEMApp. Minden jog fenntartva.</p>
-        <p>A weboldalon szereplő szabályozási információk tájékoztató jellegűek, és nem minősülnek jogi vagy energetikai auditori tanácsadásnak. Jogi háttér: 2026. júliusi állapot.</p>
+        <p>A weboldalon szereplő szabályozási információk tájékoztató jellegűek, és nem minősülnek jogi vagy energetikai auditori tanácsadásnak.</p>
       </div>
     </div>
   </footer>
